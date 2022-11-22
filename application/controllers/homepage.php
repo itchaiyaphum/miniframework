@@ -8,9 +8,11 @@ class Homepage extends Base_object
         $users_items = $users->get_items();
 
         $data = [];
+        $data['title'] = 'ระบบสั่งอาหารออนไลน์';
         $data['users_items'] = $users_items;
 
-        $this->app->view('header');
+        $this->app->view('header', $data);
+        $this->app->view('nav', $data);
         $this->app->view('homepage', $data);
         $this->app->view('footer');
     }

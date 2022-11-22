@@ -48,6 +48,7 @@ class App
     private function _init_base()
     {
         require_once APPPATH.DS.'core'.DS.'base_object.php';
+        require_once APPPATH.DS.'core'.DS.'common.php';
     }
 
     private function _init_database()
