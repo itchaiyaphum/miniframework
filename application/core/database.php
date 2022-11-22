@@ -19,6 +19,7 @@ class Database extends Base_object
 
         // Create connection
         $conn = new mysqli($config_dabase['hostname'], $config_dabase['username'], $config_dabase['password'], $config_dabase['db_name']);
+        $conn->set_charset($config_dabase['charset']);
 
         // Check connection
         if ($conn->connect_error) {
