@@ -6,4 +6,4 @@ define('DS', DIRECTORY_SEPARATOR);
 define('APPPATH', realpath('application').DS);
 
 $app = new App();
-$app->start('homepage', 'index');
+$app->start('auth', 'index');

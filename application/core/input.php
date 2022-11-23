@@ -5,7 +5,7 @@ class Input extends Base_object
     // get input type get
     public function get($var_name = '', $default = '')
     {
-        if (!isset($_GET[$var_name])) {
+        if (isset($_GET[$var_name])) {
             return $_GET[$var_name];
         }
 
@@ -15,7 +15,7 @@ class Input extends Base_object
     // get input type post
     public function post($var_name = '', $default = '')
     {
-        if (!isset($_POST[$var_name])) {
+        if (isset($_POST[$var_name])) {
             return $_POST[$var_name];
         }
 
@@ -25,7 +25,7 @@ class Input extends Base_object
     // get file upload data
     public function file($var_name = '', $default = '')
     {
-        if (!isset($_FILES[$var_name])) {
+        if (isset($_FILES[$var_name])) {
             return $_FILES[$var_name];
         }
 
@@ -35,7 +35,7 @@ class Input extends Base_object
     // get session data
     public function session($var_name = '', $default = '')
     {
-        if (!isset($_SESSION[$var_name])) {
+        if (isset($_SESSION[$var_name])) {
             return $_SESSION[$var_name];
         }
 

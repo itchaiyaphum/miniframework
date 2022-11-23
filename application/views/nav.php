@@ -22,54 +22,32 @@
             id="navbarMenu"
           >
             <ul class="list-group">
-              <li class="list-group-item">Main</li>
+              <li class="list-group-item">เมนูหลัก</li>
               <li>
                 <a class="list-group-item active" href="/"
-                  ><i class="bi-house"></i> Home</a
+                  ><i class="bi-house"></i> หน้าหลัก</a
                 >
               </li>
-              <li>
-                <a class="list-group-item" href="/news.php"
-                  ><i class="bi-megaphone"></i> News</a
-                >
-              </li>
-              <li>
-                <a class="list-group-item" href="/about.php"
-                  ><i class="bi-info-circle"></i> About</a
-                >
-              </li>
-              <li>
-                <a class="list-group-item" href="/contact.php"
-                  ><i class="bi-envelope"></i> Contact</a
-                >
-              </li>
-              <li class="list-group-item">User</li>
+              <li class="list-group-item">ผู้ใช้งาน</li>
               <li>
                 <a class="list-group-item" href="/profile.php"
-                  ><i class="bi-person-circle"></i> My Profile</a
+                  ><i class="bi-person-circle"></i> โปรไฟล์ของฉัน</a
                 >
               </li>
-              <li class="list-group-item">Settings</li>
+              <li class="list-group-item">ตั้งค่าบัญชี</li>
               <li>
-                <a class="list-group-item" href="/ettings-profile.php"
-                  ><i class="bi-pencil-square"></i> Edit Profile</a
+                <a class="list-group-item" href="/settings-profile.php"
+                  ><i class="bi-pencil-square"></i> แก้ไขข้อมูลส่วนตัว</a
                 >
               </li>
               <li>
                 <a class="list-group-item" href="/settings-password.php"
-                  ><i class="bi-lock"></i> Change Password</a
+                  ><i class="bi-lock"></i> เปลี่ยนรหัสผ่าน</a
                 >
               </li>
               <li>
-                <a
-                  class="list-group-item"
-                  href="/settings-recentdevices.php"
-                  ><i class="bi-phone"></i> Recent Devices</a
-                >
-              </li>
-              <li>
-                <a class="list-group-item" href="/logout.php"
-                  ><i class="bi-power"></i> Sign out</a
+                <a class="list-group-item" href="/auth_logout.php"
+                  ><i class="bi-power"></i> ออกจากระบบ</a
                 >
               </li>
             </ul>
@@ -79,21 +57,17 @@
           <div class="d-none d-sm-flex flex-grow-1">
             <ul class="nav flex-row">
               <li class="nav-item active">
-                <a href="/" class="nav-link">Home</a>
-              </li>
-              <li class="nav-item">
-                <a href="/news.php" class="nav-link">News</a>
-              </li>
-              <li class="nav-item">
-                <a href="/about.php" class="nav-link">About</a>
-              </li>
-              <li class="nav-item">
-                <a href="/contact.php" class="nav-link">Contact</a>
+                <a href="/" class="nav-link">หน้าหลัก</a>
               </li>
             </ul>
           </div>
 
           <div class="dropdown dropstart d-none d-sm-flex">
+            <?php
+            $app = &get_instance();
+            $profile = $app->library('profile_lib');
+            if ($profile->is_login()) {
+                ?>
             <a
               href="#"
               class="d-block link-dark text-decoration-none"
@@ -112,35 +86,34 @@
             </a>
             <ul class="dropdown-menu text-small">
               <li>
-                <a class="dropdown-item" href="/ui/3.1.profile.html"
-                  ><i class="bi-person-circle"></i> Wannapong Kumjumpon</a
+                <a class="dropdown-item" href="/profile.php"
+                  ><i class="bi-person-circle"></i> <?php echo $profile->firstname.' '.$profile->lastname; ?></a
                 >
               </li>
               <li>
-                <a class="dropdown-item" href="/ui/3.2.settings-profile.html"
-                  ><i class="bi-pencil-square"></i> Edit Profile</a
+                <a class="dropdown-item" href="/settings-profile.php"
+                  ><i class="bi-pencil-square"></i> แก้ไขข้อมูลส่วนตัว</a
                 >
               </li>
               <li>
                 <a class="dropdown-item" href="/settings-password.php"
-                  ><i class="bi-lock"></i> Change Password</a
-                >
-              </li>
-              <li>
-                <a
-                  class="dropdown-item"
-                  href="/settings-recentdevices.php"
-                  class="nav-link"
-                  ><i class="bi-phone"></i> Recent Devices</a
+                  ><i class="bi-lock"></i> เปลี่ยนรหัสผ่าน</a
                 >
               </li>
               <li><hr class="dropdown-divider" /></li>
               <li>
-                <a class="dropdown-item" href="/logout.php"
-                  ><i class="bi-power"></i> Sign out</a
+                <a class="dropdown-item" href="/auth_logout.php"
+                  ><i class="bi-power"></i> ออกจากระบบ</a
                 >
               </li>
             </ul>
+            <?php } else {
+                ?>
+              <a class="btn btn-primary" href="/auth_login.php"
+                  ><i class="bi-person"></i> ลงชื่อเข้าสู่ระบบ</a
+                >
+              <?php
+            } ?>
           </div>
         </div>
       </nav>

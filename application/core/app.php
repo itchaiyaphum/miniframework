@@ -2,15 +2,27 @@
 
 class App
 {
+    private static $instance;
+
     public $db = null;
     public $input = null;
+    public $form_validation = null;
+    public $session = null;
     public $data = null;
+
+    public function __construct()
+    {
+        self::$instance = &$this;
+    }
 
     public function start($controller_name = 'homepage', $method = 'index', $params = [])
     {
+        $this->_init_environment();
         $this->_init_base();
         $this->_init_database();
         $this->_init_input();
+        $this->_init_form_validation();
+        $this->_init_session();
         $this->_init_controller($controller_name, $method, $params);
 
         return $this;
@@ -37,9 +49,18 @@ class App
         require_once $view_path;
     }
 
+    private function _init_environment()
+    {
+        if ($_SERVER['SERVER_NAME'] == 'dev.miniframework.itchaiyaphum.com') {
+            error_reporting(-1);
+            ini_set('display_errors', 1);
+        }
+    }
+
     private function _init_base()
     {
         require_once APPPATH.DS.'core'.DS.'base_object.php';
+        require_once APPPATH.DS.'core'.DS.'controller.php';
         require_once APPPATH.DS.'core'.DS.'common.php';
     }
 
@@ -60,6 +81,22 @@ class App
         $this->input = $obj;
     }
 
+    private function _init_form_validation()
+    {
+        require_once 'form_validation.php';
+        $class = ucfirst('form_validation');
+        $obj = new $class($this);
+        $this->form_validation = $obj;
+    }
+
+    private function _init_session()
+    {
+        require_once 'session.php';
+        $class = ucfirst('session');
+        $obj = new $class($this);
+        $this->session = $obj;
+    }
+
     private function _init_controller($controller_name = false, $method = 'index', $params = [])
     {
         // user controller
@@ -68,5 +105,10 @@ class App
         $class = ucfirst($controller_name);
         $obj = new $class($this);
         call_user_func_array([&$obj, $method], $params);
+    }
+
+    public static function &get_instance()
+    {
+        return self::$instance;
     }
 }
