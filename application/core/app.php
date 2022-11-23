@@ -11,11 +11,12 @@ class App
         $this->_init_base();
         $this->_init_database();
         $this->_init_input();
-        $this->_controller($controller_name, $method, $params);
+        $this->_init_controller($controller_name, $method, $params);
 
         return $this;
     }
 
+    // load user libraries
     public function library($library_name = '')
     {
         $library_path = APPPATH.DS.'libraries'.DS.$library_name.'.php';
@@ -26,6 +27,7 @@ class App
         return $obj;
     }
 
+    // load user views
     public function view($view_name = '', $data = '')
     {
         // set view data to app object
@@ -33,16 +35,6 @@ class App
 
         $view_path = APPPATH.DS.'views'.DS.$view_name.'.php';
         require_once $view_path;
-    }
-
-    private function _controller($controller_name = false, $method = 'index', $params = [])
-    {
-        // user controller
-        $controller_path = APPPATH.DS.'controllers'.DS.$controller_name.'.php';
-        require_once $controller_path;
-        $class = ucfirst($controller_name);
-        $obj = new $class($this);
-        call_user_func_array([&$obj, $method], $params);
     }
 
     private function _init_base()
@@ -66,5 +58,15 @@ class App
         $class = ucfirst('input');
         $obj = new $class($this);
         $this->input = $obj;
+    }
+
+    private function _init_controller($controller_name = false, $method = 'index', $params = [])
+    {
+        // user controller
+        $controller_path = APPPATH.DS.'controllers'.DS.$controller_name.'.php';
+        require_once $controller_path;
+        $class = ucfirst($controller_name);
+        $obj = new $class($this);
+        call_user_func_array([&$obj, $method], $params);
     }
 }
