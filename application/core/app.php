@@ -11,7 +11,7 @@ class App
         $this->_init_base();
         $this->_init_database();
         $this->_init_input();
-        $this->controller($controller_name, $method, $params);
+        $this->_controller($controller_name, $method, $params);
 
         return $this;
     }
@@ -35,7 +35,7 @@ class App
         require_once $view_path;
     }
 
-    private function controller($controller_name = false, $method = 'index', $params = [])
+    private function _controller($controller_name = false, $method = 'index', $params = [])
     {
         // user controller
         $controller_path = APPPATH.DS.'controllers'.DS.$controller_name.'.php';
@@ -56,6 +56,7 @@ class App
         require_once 'database.php';
         $class = ucfirst('database');
         $obj = new $class($this);
+        $obj->connect_db();
         $this->db = $obj;
     }
 

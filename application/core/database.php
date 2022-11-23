@@ -2,17 +2,10 @@
 
 class Database extends Base_object
 {
-    public $app = null;
     public $db = null;
     public $result = null;
 
-    public function __construct($app = null)
-    {
-        $this->app = $app;
-        $this->_connect_database();
-    }
-
-    private function _connect_database()
+    public function connect_db()
     {
         // load database configuration
         require_once APPPATH.DS.'config'.DS.'database.php';

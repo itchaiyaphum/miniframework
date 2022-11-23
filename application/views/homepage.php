@@ -1,5 +1,4 @@
 <div class="container">
-    
     <div class="p-5 mb-4 bg-light rounded-3">
       <div class="container-fluid py-5">
         <h1 class="display-5 fw-bold">ระบบสั่งอาหารออนไลน์</h1>
@@ -7,5 +6,4 @@
         <a class="btn btn-primary btn-lg" href="/login.php">เข้าสู่ระบบ</a>
       </div>
     </div>
-
 </div>
