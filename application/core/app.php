@@ -59,6 +59,9 @@ class App
 
     private function _init_base()
     {
+        define('DS', DIRECTORY_SEPARATOR);
+        define('APPPATH', realpath('application').DS);
+
         require_once APPPATH.DS.'core'.DS.'base_object.php';
         require_once APPPATH.DS.'core'.DS.'controller.php';
         require_once APPPATH.DS.'core'.DS.'common.php';
