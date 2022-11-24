@@ -1,3 +1,9 @@
+        <hr />
+        <div class="container text-center">
+            <div>แผนกเทคโนโลยีสารสนเทศ วิทยาลัยเทคนิคชัยภูมิ</div>
+            <div>แข่งขันทักษะประจำปีการศึกษา 2565</div>
+        </div>
         <script src="/assets/js/bootstrap.bundle.min.js"></script>
-    </body>
-</html>
+        </body>
+
+        </html>
