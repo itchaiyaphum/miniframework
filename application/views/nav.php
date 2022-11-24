@@ -47,9 +47,7 @@
 
             <div class="dropdown dropstart d-none d-sm-flex">
                 <?php
-            $app = &get_instance();
-                $profile = $app->library('profile_lib');
-                if ($profile->is_login()) {
+                if ($this->profile_lib->is_login()) {
                     ?>
                 <a href="#" class="d-block link-dark text-decoration-none" data-bs-toggle="dropdown"
                     aria-expanded="false">
@@ -59,7 +57,7 @@
                 <ul class="dropdown-menu text-small">
                     <li>
                         <a class="dropdown-item" href="/profile.php"><i class="bi-person-circle"></i>
-                            <?php echo $profile->firstname.' '.$profile->lastname; ?></a>
+                            <?php echo $this->profile_lib->firstname.' '.$this->profile_lib->lastname; ?></a>
                     </li>
                     <li>
                         <a class="dropdown-item" href="/settings-profile.php"><i class="bi-pencil-square"></i>

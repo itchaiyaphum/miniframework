@@ -23,6 +23,7 @@ class App
         $this->_init_input();
         $this->_init_form_validation();
         $this->_init_session();
+        $this->_init_library();
         $this->_init_controller($controller_name, $method, $params);
 
         return $this;
@@ -35,6 +36,7 @@ class App
         require_once $library_path;
         $class = ucfirst($library_name);
         $obj = new $class($this);
+        $this->$library_name = $obj;
 
         return $obj;
     }
@@ -108,6 +110,13 @@ class App
         $class = ucfirst($controller_name);
         $obj = new $class($this);
         call_user_func_array([&$obj, $method], $params);
+    }
+
+    private function _init_library()
+    {
+        $this->library('auth_lib');
+        $this->library('users_lib');
+        $this->library('profile_lib');
     }
 
     public static function &get_instance()

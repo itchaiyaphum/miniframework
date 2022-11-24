@@ -4,8 +4,6 @@ class Auth extends Controller
 {
     public function index()
     {
-        $auth = $this->app->library('auth_lib');
-
         // get data from login_form
         $email = $this->app->input->get_post('email', '');
         $password = $this->app->input->get_post('password', '');
@@ -17,7 +15,7 @@ class Auth extends Controller
         // run validation
         if ($this->app->form_validation->run()) {
             // check login
-            if ($auth->login($email, $password)) {
+            if ($this->app->auth_lib->login($email, $password)) {
                 redirect('/');
             }
         }
@@ -34,8 +32,7 @@ class Auth extends Controller
 
     public function logout()
     {
-        $auth = $this->app->library('auth_lib');
-        $auth->logout();
+        $this->app->auth_lib->logout();
         redirect('/auth_login.php');
     }
 }

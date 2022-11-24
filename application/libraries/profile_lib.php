@@ -16,9 +16,7 @@ class Profile_lib extends Base_object
 
     public function is_login()
     {
-        $auth = $this->app->library('auth_lib');
-
-        return $auth->is_login();
+        return $this->app->auth_lib->is_login();
     }
 
     public function get_profile()
