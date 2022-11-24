@@ -7,7 +7,8 @@ function &get_instance()
 
 function base_url($url = '')
 {
-    $base_url = 'http://dev.miniframework.itchaiyaphum.com/';
+    $app = &get_instance();
+    $base_url = $app->config['base_url'];
     if ($url == '/') {
         $url = '';
     }

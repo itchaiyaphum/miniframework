@@ -3,7 +3,8 @@
 class App
 {
     private static $instance;
-
+    public $environment = 'development';
+    public $config = null;
     public $db = null;
     public $input = null;
     public $form_validation = null;
@@ -56,17 +57,20 @@ class App
         define('DS', DIRECTORY_SEPARATOR);
         define('APPPATH', realpath('application').DS);
 
-        if ($_SERVER['SERVER_NAME'] == 'dev.miniframework.itchaiyaphum.com') {
+        if (preg_match('/dev./i', $_SERVER['SERVER_NAME'])) {
             error_reporting(-1);
             ini_set('display_errors', 1);
-            define('CONFIG_ENV', '');
+            $this->environment = 'development';
         } else {
-            define('CONFIG_ENV', 'production'.DS);
+            $this->environment = 'production';
         }
     }
 
     private function _init_base()
     {
+        require_once APPPATH.DS.'config'.DS.$this->environment.'.php';
+        $this->config = $config;
+
         require_once APPPATH.DS.'core'.DS.'base_object.php';
         require_once APPPATH.DS.'core'.DS.'controller.php';
         require_once APPPATH.DS.'core'.DS.'common.php';
