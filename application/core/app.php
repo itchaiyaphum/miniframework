@@ -53,17 +53,20 @@ class App
 
     private function _init_environment()
     {
+        define('DS', DIRECTORY_SEPARATOR);
+        define('APPPATH', realpath('application').DS);
+
         if ($_SERVER['SERVER_NAME'] == 'dev.miniframework.itchaiyaphum.com') {
             error_reporting(-1);
             ini_set('display_errors', 1);
+            define('CONFIG_ENV', '');
+        } else {
+            define('CONFIG_ENV', 'production'.DS);
         }
     }
 
     private function _init_base()
     {
-        define('DS', DIRECTORY_SEPARATOR);
-        define('APPPATH', realpath('application').DS);
-
         require_once APPPATH.DS.'core'.DS.'base_object.php';
         require_once APPPATH.DS.'core'.DS.'controller.php';
         require_once APPPATH.DS.'core'.DS.'common.php';

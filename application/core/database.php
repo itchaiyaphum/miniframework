@@ -8,7 +8,7 @@ class Database extends Base_object
     public function connect_db()
     {
         // load database configuration
-        require_once APPPATH.DS.'config'.DS.'database.php';
+        require_once APPPATH.DS.'config'.DS.CONFIG_ENV.'database.php';
 
         // Create connection
         $conn = new mysqli($config_dabase['hostname'], $config_dabase['username'], $config_dabase['password'], $config_dabase['db_name']);
