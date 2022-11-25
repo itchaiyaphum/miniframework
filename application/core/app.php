@@ -54,6 +54,8 @@ class App
 
     private function _init_environment()
     {
+        date_default_timezone_set('Asia/Bangkok');
+
         define('DS', DIRECTORY_SEPARATOR);
         define('APPPATH', realpath('application').DS);
 

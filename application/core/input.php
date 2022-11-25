@@ -3,51 +3,35 @@
 class Input extends Base_object
 {
     // get input type get
-    public function get($var_name = '', $default = '')
+    public function get($index = null, $default = null)
     {
-        if (isset($_GET[$var_name])) {
-            return $_GET[$var_name];
-        }
-
-        return $default;
+        return $this->fetch_from_array($_GET, $index, $default);
     }
 
     // get input type post
-    public function post($var_name = '', $default = '')
+    public function post($index = null, $default = null)
     {
-        if (isset($_POST[$var_name])) {
-            return $_POST[$var_name];
-        }
-
-        return $default;
+        return $this->fetch_from_array($_POST, $index, $default);
     }
 
     // get file upload data
-    public function file($var_name = '', $default = '')
+    public function file($index = null, $default = null)
     {
-        if (isset($_FILES[$var_name])) {
-            return $_FILES[$var_name];
-        }
-
-        return $default;
+        return $this->fetch_from_array($_FILES, $index, $default);
     }
 
     // get session data
-    public function session($var_name = '', $default = '')
+    public function session($index = null, $default = null)
     {
-        if (isset($_SESSION[$var_name])) {
-            return $_SESSION[$var_name];
-        }
-
-        return $default;
+        return $this->fetch_from_array($_SESSION, $index, $default);
     }
 
     // get input type get,post
-    public function get_post($var_name = '', $default = '')
+    public function get_post($index = null, $default = null)
     {
-        $result_get = $this->get($var_name, $default);
-        $result_post = $this->post($var_name, $default);
-        $result_file = $this->file($var_name, $default);
+        $result_get = $this->get($index, $default);
+        $result_post = $this->post($index, $default);
+        $result_file = $this->file($index, $default);
 
         if (!empty($result_get)) {
             return $result_get;

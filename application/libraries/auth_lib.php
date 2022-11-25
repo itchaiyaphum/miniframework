@@ -34,6 +34,33 @@ class Auth_lib extends Base_object
         return false;
     }
 
+    public function register($register_data = [])
+    {
+        // check email exists
+        if ($this->_check_email_exists($register_data['email'])) {
+            $this->app->form_validation->set_error("อีเมล์ ({$register_data['email']}) นี้ถูกใช้ในการลงทะเบียนแล้ว กรุณาใช้อีเมล์อื่น!");
+
+            return false;
+        }
+
+        // preparing data
+        $hash_password = md5($register_data['password']);
+        $data = [
+            'firstname' => $register_data['firstname'],
+            'lastname' => $register_data['lastname'],
+            'user_type' => $register_data['user_type'],
+            'email' => $register_data['email'],
+            'password' => $hash_password,
+            'status' => 0,
+            'thumbnail' => '/storage/profiles/no-thumbnail.jpg',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ];
+
+        // insert register data to database
+        return $this->app->db->insert('users', $data);
+    }
+
     public function set_login_session($email = '')
     {
         $this->app->session->set('is_login', true);
@@ -41,10 +68,6 @@ class Auth_lib extends Base_object
         $this->app->session->set('firstname', 'aodto');
         $this->app->session->set('lastname', 'wk');
         $this->app->session->set('status', 1);
-    }
-
-    public function register()
-    {
     }
 
     public function reset_password()
@@ -62,5 +85,12 @@ class Auth_lib extends Base_object
     public function logout()
     {
         return $this->app->session->destroy();
+    }
+
+    private function _check_email_exists($email = null)
+    {
+        $query = $this->app->db->query("SELECT * FROM users WHERE email='{$email}'");
+
+        return (!empty($query->result())) ? true : false;
     }
 }

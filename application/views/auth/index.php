@@ -28,11 +28,6 @@
                                 <input type="password" class="form-control" id="inputPassword" name="password"
                                     value="<?php echo $this->data['password']; ?>" />
                             </div>
-                            <div class="d-flex w-100 justify-content-between mb-3">
-                                <div>
-                                    <a href="/auth_forget_password.php" class="link-primary">ลืมรหัสผ่าน?</a>
-                                </div>
-                            </div>
 
                             <button type="submit" class="btn btn-primary w-100">
                                 ลงชื่อเข้าสู่ระบบ

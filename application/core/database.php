@@ -54,20 +54,19 @@ class Database extends Base_object
         }
 
         // preparing data
-        $data_key = [];
-        $data_value = [];
+        $data_keys = [];
+        $data_values = [];
         foreach ($data as $key => $value) {
-            array_push($data_key, $key);
-            array_push($data_value, $value);
+            array_push($data_keys, "`{$key}`");
+            array_push($data_values, $this->_escape($value));
         }
-        $data_key_sql = implode(',', $data_array);
-        $data_value_sql = implode(',', $data_array);
+        $data_keys_sql = implode(',', $data_keys);
+        $data_values_sql = implode(',', $data_values);
 
         // insert data to database
-        $sql = "INSERT INTO {$table_name} ({$data_key_sql}) VALUES ({$data_value_sql})";
-        if ($this->db->query($sql) === true) {
-            return true;
-        }
+        $sql = "INSERT INTO `{$table_name}` ({$data_keys_sql}) VALUES ({$data_values_sql})";
+
+        return $this->db->query($sql);
     }
 
     // update data
@@ -80,12 +79,12 @@ class Database extends Base_object
         // preparing data
         $data_array = [];
         foreach ($data as $key => $value) {
-            array_push($data_array, "{$key}={$value}");
+            array_push($data_array, "`{$key}`={$this->_escape($value)}");
         }
         $data_to_sql = implode(',', $data_array);
 
         // update data to database
-        $sql = "UPDATE {$table_name} SET {$data_to_sql} WHERE {$where}";
+        $sql = "UPDATE `{$table_name}` SET {$data_to_sql} WHERE {$where}";
         if ($this->db->query($sql) === true) {
             return true;
         }
@@ -106,5 +105,18 @@ class Database extends Base_object
         }
 
         return false;
+    }
+
+    private function _escape($str)
+    {
+        if (is_string($str)) {
+            return "'".mysqli_real_escape_string($this->db, $str)."'";
+        } elseif (is_bool($str)) {
+            return ($str === false) ? 0 : 1;
+        } elseif ($str === null) {
+            return 'NULL';
+        }
+
+        return $str;
     }
 }
