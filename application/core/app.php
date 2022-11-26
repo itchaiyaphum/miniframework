@@ -43,12 +43,20 @@ class App
     }
 
     // load user views
-    public function view($view_name = '', $data = '')
+    public function view($view_name = '', $data = '', $return = false)
     {
         // set view data to app object
         $this->data = $data;
 
         $view_path = APPPATH.DS.'views'.DS.$view_name.'.php';
+
+        if ($return) {
+            ob_start();
+            include $view_path;
+
+            return ob_get_clean();
+        }
+
         require_once $view_path;
     }
 
@@ -126,6 +134,7 @@ class App
         $this->library('auth_lib');
         $this->library('users_lib');
         $this->library('profile_lib');
+        $this->library('province_lib');
     }
 
     public static function &get_instance()

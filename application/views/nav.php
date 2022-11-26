@@ -23,11 +23,11 @@
                     </li>
                     <li class="list-group-item">ตั้งค่าบัญชี</li>
                     <li>
-                        <a class="list-group-item" href="/settings-profile.php"><i class="bi-pencil-square"></i>
+                        <a class="list-group-item" href="/settings_profile.php"><i class="bi-pencil-square"></i>
                             แก้ไขข้อมูลส่วนตัว</a>
                     </li>
                     <li>
-                        <a class="list-group-item" href="/settings-password.php"><i class="bi-lock"></i>
+                        <a class="list-group-item" href="/settings_password.php"><i class="bi-lock"></i>
                             เปลี่ยนรหัสผ่าน</a>
                     </li>
                     <li>
@@ -60,11 +60,11 @@
                             <?php echo $this->profile_lib->firstname.' '.$this->profile_lib->lastname; ?></a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="/settings-profile.php"><i class="bi-pencil-square"></i>
+                        <a class="dropdown-item" href="/settings_profile.php"><i class="bi-pencil-square"></i>
                             แก้ไขข้อมูลส่วนตัว</a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="/settings-password.php"><i class="bi-lock"></i>
+                        <a class="dropdown-item" href="/settings_password.php"><i class="bi-lock"></i>
                             เปลี่ยนรหัสผ่าน</a>
                     </li>
                     <li>

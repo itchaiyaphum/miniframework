@@ -6,6 +6,9 @@ class Form_validation extends Base_object
     public $error_status = false;
     public $error_messages = '';
 
+    public $action_status = '';
+    public $action_messages = '';
+
     public function set_rules($var_name = '', $var_label = '', $rule = 'required')
     {
         array_push($this->check_vars, ['var_name' => $var_name, 'var_label' => $var_label, 'rule' => $rule]);
@@ -36,6 +39,12 @@ class Form_validation extends Base_object
         $this->error_messages .= "<li>{$error}</li>";
     }
 
+    public function set_message($status = null, $message = '')
+    {
+        $this->action_status = $status;
+        $this->action_messages .= "<li>{$message}</li>";
+    }
+
     public function _check_required($item = [])
     {
         $var_value = $this->app->input->get_post($item['var_name']);
@@ -49,5 +58,8 @@ class Form_validation extends Base_object
     {
         $this->error_status = false;
         $this->error_messages = '';
+
+        $this->action_status = '';
+        $this->action_messages = '';
     }
 }

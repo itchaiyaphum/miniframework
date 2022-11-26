@@ -39,3 +39,12 @@ function validation_errors()
         echo '<div class="alert alert-danger">'.$app->form_validation->error_messages.'</div>';
     }
 }
+
+function action_messages()
+{
+    $app = &get_instance();
+
+    if ($app->form_validation->action_status === 'success') {
+        echo '<div class="alert alert-success">'.$app->form_validation->action_messages.'</div>';
+    }
+}

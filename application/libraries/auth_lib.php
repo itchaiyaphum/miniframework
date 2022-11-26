@@ -63,11 +63,14 @@ class Auth_lib extends Base_object
 
     public function set_login_session($email = '')
     {
+        $profile = $this->app->profile_lib->get_profile($email);
+
         $this->app->session->set('is_login', true);
-        $this->app->session->set('email', $email);
-        $this->app->session->set('firstname', 'aodto');
-        $this->app->session->set('lastname', 'wk');
-        $this->app->session->set('status', 1);
+        $this->app->session->set('profile_id', $profile->id);
+        $this->app->session->set('email', $profile->email);
+        $this->app->session->set('firstname', $profile->firstname);
+        $this->app->session->set('lastname', $profile->lastname);
+        $this->app->session->set('status', $profile->status);
     }
 
     public function reset_password()

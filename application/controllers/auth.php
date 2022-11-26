@@ -1,9 +1,21 @@
 <?php
 
-class Auth extends Controller
+class Auth extends Base_object
 {
+    private function _check_login()
+    {
+        $auth = $this->app->library('auth_lib');
+        $profile = $this->app->library('profile_lib');
+
+        if ($auth->is_login()) {
+            redirect('/');
+        }
+    }
+
     public function index()
     {
+        $this->_check_login();
+
         // get data from login_form
         $email = $this->app->input->get_post('email', '');
         $password = $this->app->input->get_post('password', '');
@@ -32,6 +44,8 @@ class Auth extends Controller
 
     public function register()
     {
+        $this->_check_login();
+
         // get data from login_form
         $register_data = $this->app->input->post();
 
@@ -84,6 +98,8 @@ class Auth extends Controller
 
     public function register_completed()
     {
+        $this->_check_login();
+
         $data = [];
         $data['title'] = 'ลงทะเบียนใหม่ สำเร็จเรียบร้อยแล้ว - ระบบสั่งอาหารออนไลน์';
 
