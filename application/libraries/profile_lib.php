@@ -12,6 +12,7 @@ class Profile_lib extends Base_object
     public $mobile_no = '';
     public $type = 'customer';
     public $status = 0;
+    public $password = '';
 
     public function __construct($app)
     {
@@ -54,6 +55,41 @@ class Profile_lib extends Base_object
             'province_id' => $profile_data['province_id'],
             'mobile_no' => $profile_data['mobile_no'],
             'thumbnail' => $thumbnail,
+            'updated_at' => now(),
+        ];
+
+        $where = 'id='.$profile_data['id'];
+
+        // insert register data to database
+        return $this->app->db->update('users', $data, $where);
+    }
+
+    public function change_password($profile_data = [])
+    {
+        // get current user profile data
+        $profile = $this->app->profile_lib->get_profile();
+
+        $hash_current_password = md5($profile_data['current_password']);
+        $hash_new_password = md5($profile_data['new_password']);
+        $hash_confirm_new_password = md5($profile_data['confirm_new_password']);
+
+        // check current_password is correct
+        if ($profile->password != $hash_current_password) {
+            $this->app->form_validation->set_error('คุณกรอกรหัสผ่านปัจจุบันไม่ถูกต้อง, กรุณาลองใหม่อีกครั้ง!');
+
+            return false;
+        }
+
+        // check new_password match confirm_new_password
+        if ($hash_new_password != $hash_confirm_new_password) {
+            $this->app->form_validation->set_error('รหัสผ่านใหม่ ไม่ตรงกับ ยืนยันรหัสผ่านใหม่, กรุณาลองใหม่อีกครั้ง!');
+
+            return false;
+        }
+
+        // preparing data
+        $data = [
+            'password' => $hash_new_password,
             'updated_at' => now(),
         ];
 

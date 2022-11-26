@@ -83,7 +83,7 @@
                         </div>
                         <!-- end: submit button -->
 
-                        <input type="hidden" name="id" value="1" />
+                        <input type="hidden" name="id" value="<?php echo $this->data['profile']->id; ?>" />
                     </form>
                 </div>
             </div>
