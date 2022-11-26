@@ -28,6 +28,11 @@ class Auth extends Base_object
         if ($this->app->form_validation->run()) {
             // check login
             if ($this->app->auth_lib->login($email, $password)) {
+                if ($this->app->session->get('user_type') == 'admin') {
+                    redirect('/admin.php');
+
+                    return true;
+                }
                 redirect('/');
             }
         }

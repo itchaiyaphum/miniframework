@@ -71,6 +71,7 @@ class Auth_lib extends Base_object
         $this->app->session->set('firstname', $profile->firstname);
         $this->app->session->set('lastname', $profile->lastname);
         $this->app->session->set('status', $profile->status);
+        $this->app->session->set('user_type', $profile->user_type);
     }
 
     public function reset_password()

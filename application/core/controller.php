@@ -10,10 +10,17 @@ class Controller extends Base_object
 
     private function _check_login()
     {
-        $auth = $this->app->library('auth_lib');
-
-        if (!$auth->is_login()) {
+        if (!$this->app->auth_lib->is_login()) {
             redirect('/auth_login.php');
+        }
+    }
+
+    public function _check_admin()
+    {
+        $profile = $this->app->profile_lib->get_profile();
+
+        if ($profile->user_type != 'admin') {
+            redirect('/');
         }
     }
 }

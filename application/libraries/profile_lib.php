@@ -10,7 +10,7 @@ class Profile_lib extends Base_object
     public $province_id = 0;
     public $zip_code = '';
     public $mobile_no = '';
-    public $type = 'customer';
+    public $user_type = 'customer';
     public $status = 0;
     public $password = '';
 
@@ -101,6 +101,6 @@ class Profile_lib extends Base_object
 
     public function get_user_type()
     {
-        return $this->type;
+        return $this->user_type;
     }
 }

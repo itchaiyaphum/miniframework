@@ -67,6 +67,14 @@
                         <a class="dropdown-item" href="/settings_password.php"><i class="bi-lock"></i>
                             เปลี่ยนรหัสผ่าน</a>
                     </li>
+
+                    <?php
+                    if ($this->profile_lib->get_user_type() == 'admin') {
+                        echo '<li><hr class="dropdown-divider" /></li>';
+                        echo '<a class="dropdown-item" href="/admin.php"><i class="bi-person"></i> ระบบบริหารจัดการหลังบ้าน</a>';
+                    }
+                    ?>
+                    
                     <li>
                         <hr class="dropdown-divider" />
                     </li>
