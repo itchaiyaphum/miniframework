@@ -26,7 +26,9 @@ class App
         $this->_init_session();
         $this->_init_library();
 
-        $method = (isset($_GET['action'])) ? $_GET['action'] : 'index';
+        if (empty($method)) {
+            $method = (isset($_GET['action'])) ? $_GET['action'] : 'index';
+        }
         $this->_init_controller($controller_name, $method, $params);
 
         return $this;
