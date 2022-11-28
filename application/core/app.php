@@ -16,7 +16,7 @@ class App
         self::$instance = &$this;
     }
 
-    public function start($controller_name = 'homepage', $method = 'index', $params = [])
+    public function start($controller_name = 'homepage', $method = null, $params = [])
     {
         $this->_init_environment();
         $this->_init_base();
@@ -25,6 +25,8 @@ class App
         $this->_init_form_validation();
         $this->_init_session();
         $this->_init_library();
+
+        $method = (isset($_GET['action'])) ? $_GET['action'] : 'index';
         $this->_init_controller($controller_name, $method, $params);
 
         return $this;
@@ -138,6 +140,8 @@ class App
         $this->library('province_lib');
         $this->library('admin_users_lib');
         $this->library('admin_riders_lib');
+        $this->library('admin_restaurant_types_lib');
+        $this->library('admin_restaurants_lib');
     }
 
     public static function &get_instance()
