@@ -3,4 +3,4 @@
 require_once 'application/core/app.php';
 
 $app = new App();
-$app->start('admin', 'restaurants');
+$app->start('admin_restaurants');
