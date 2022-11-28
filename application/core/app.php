@@ -137,6 +137,7 @@ class App
         $this->library('profile_lib');
         $this->library('province_lib');
         $this->library('admin_users_lib');
+        $this->library('admin_riders_lib');
     }
 
     public static function &get_instance()

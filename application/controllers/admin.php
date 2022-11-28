@@ -46,17 +46,4 @@ class Admin extends Controller
         $this->app->view('admin/restaurants', $data);
         $this->app->view('footer');
     }
-
-    public function riders()
-    {
-        $data = [];
-        $data['title'] = 'จัดการผู้ส่งอาหาร - ระบบสั่งอาหารออนไลน์';
-        $data['active_menu'] = 'riders';
-        $data['left_menu'] = $this->app->view('admin/menu', $data, true);
-
-        $this->app->view('header', $data);
-        $this->app->view('nav', $data);
-        $this->app->view('admin/riders', $data);
-        $this->app->view('footer');
-    }
 }
