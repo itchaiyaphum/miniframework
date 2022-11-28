@@ -23,4 +23,13 @@ class Controller extends Base_object
             redirect('/');
         }
     }
+
+    public function _check_staff()
+    {
+        $profile = $this->app->profile_lib->get_profile();
+
+        if ($profile->user_type != 'staff') {
+            redirect('/');
+        }
+    }
 }

@@ -74,6 +74,20 @@
                         echo '<a class="dropdown-item" href="/admin.php"><i class="bi-person"></i> ระบบบริหารจัดการหลังบ้าน</a>';
                     }
                     ?>
+
+                    <?php
+                    if ($this->profile_lib->get_user_type() == 'staff') {
+                        echo '<li><hr class="dropdown-divider" /></li>';
+                        echo '<a class="dropdown-item" href="/staff.php"><i class="bi-person"></i> สำหรับผู้ดูแลร้านอาหาร</a>';
+                    }
+                    ?>
+
+                    <?php
+                    if ($this->profile_lib->get_user_type() == 'rider') {
+                        echo '<li><hr class="dropdown-divider" /></li>';
+                        echo '<a class="dropdown-item" href="/rider.php"><i class="bi-person"></i> สำหรับผู้ส่งอาหาร</a>';
+                    }
+                    ?>
                     
                     <li>
                         <hr class="dropdown-divider" />
