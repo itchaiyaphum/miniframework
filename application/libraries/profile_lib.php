@@ -41,7 +41,21 @@ class Profile_lib extends Base_object
         return $this;
     }
 
-    public function edit($profile_data = [])
+    public function get_profile_by_id($id = 0)
+    {
+        $query = $this->app->db->query("SELECT * FROM users WHERE id={$id}");
+        $result = $query->row();
+
+        if (!empty($result)) {
+            foreach ($result as $key => $val) {
+                $this->{$key} = $val;
+            }
+        }
+
+        return $this;
+    }
+
+    public function save($profile_data = [])
     {
         $thumbnail = '/storage/profiles/no-thumbnail.jpg';
 

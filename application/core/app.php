@@ -82,6 +82,7 @@ class App
         $this->config = $config;
 
         require_once APPPATH.DS.'core'.DS.'base_object.php';
+        require_once APPPATH.DS.'core'.DS.'base_library.php';
         require_once APPPATH.DS.'core'.DS.'controller.php';
         require_once APPPATH.DS.'core'.DS.'common.php';
     }
@@ -135,6 +136,7 @@ class App
         $this->library('users_lib');
         $this->library('profile_lib');
         $this->library('province_lib');
+        $this->library('admin_users_lib');
     }
 
     public static function &get_instance()

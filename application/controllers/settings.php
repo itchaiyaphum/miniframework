@@ -18,7 +18,7 @@ class Settings extends Controller
 
         // run validation
         if ($this->app->form_validation->run()) {
-            $this->app->profile_lib->edit($profile_form);
+            $this->app->profile_lib->save($profile_form);
             $this->app->form_validation->set_message('success', 'บันทึกข้อมูลเรียบร้อย');
         }
 

@@ -22,7 +22,7 @@ class Auth_lib extends Base_object
         if (count($results)) {
             foreach ($results as $row) {
                 if ($row['email'] == $email && $row['password'] == $hash_password) {
-                    $this->set_login_session($email);
+                    $this->set_login_session_by_email($email);
 
                     return true;
                 }
@@ -61,10 +61,9 @@ class Auth_lib extends Base_object
         return $this->app->db->insert('users', $data);
     }
 
-    public function set_login_session($email = '')
+    // external call for set login session
+    public function set_login_session($profile)
     {
-        $profile = $this->app->profile_lib->get_profile($email);
-
         $this->app->session->set('is_login', true);
         $this->app->session->set('profile_id', $profile->id);
         $this->app->session->set('email', $profile->email);
@@ -72,6 +71,14 @@ class Auth_lib extends Base_object
         $this->app->session->set('lastname', $profile->lastname);
         $this->app->session->set('status', $profile->status);
         $this->app->session->set('user_type', $profile->user_type);
+    }
+
+    // internal call for set login session by email
+    private function set_login_session_by_email($email = '')
+    {
+        $profile = $this->app->profile_lib->get_profile($email);
+
+        $this->set_login_session($profile);
     }
 
     public function reset_password()

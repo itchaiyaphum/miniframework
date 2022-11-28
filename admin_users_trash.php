@@ -3,4 +3,4 @@
 require_once 'application/core/app.php';
 
 $app = new App();
-$app->start('admin_users', 'index');
+$app->start('admin_users', 'trash');
