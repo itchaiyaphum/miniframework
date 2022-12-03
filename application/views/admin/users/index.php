@@ -70,15 +70,15 @@
                     $row = &$this->data['items'][$i];
 
                     $per_page = $this->input->get_post('per_page', 1);
-                    $link_edit = base_url('/admin_users_edit.php?id='.$row['id'].'&per_page='.$per_page);
-                    $link_restore = base_url('/admin_users_restore.php?id='.$row['id'].'&per_page='.$per_page);
-                    $link_trash = base_url('/admin_users_trash.php?id='.$row['id'].'&per_page='.$per_page);
-                    $link_delete = base_url('/admin_users_delete.php?id='.$row['id'].'&per_page='.$per_page);
-                    $link_bypass = base_url('/admin_users_bypass.php?id='.$row['id'].'&per_page='.$per_page);
+                    $link_edit = base_url('/admin_users.php?action=save&id='.$row['id'].'&per_page='.$per_page);
+                    $link_restore = base_url('/admin_users.php?action=restore&id='.$row['id'].'&per_page='.$per_page);
+                    $link_trash = base_url('/admin_users.php?action=trash&id='.$row['id'].'&per_page='.$per_page);
+                    $link_delete = base_url('/admin_users.php?action=delete&id='.$row['id'].'&per_page='.$per_page);
+                    $link_bypass = base_url('/admin_users.php?action=bypass&id='.$row['id'].'&per_page='.$per_page);
 
-                    $status_link = base_url('/admin_users_unpublish.php?id='.$row['id'].'&per_page='.$per_page);
+                    $status_link = base_url('/admin_users.php?action=unpublish&id='.$row['id'].'&per_page='.$per_page);
                     if ($row['status'] == 0) {
-                        $status_link = base_url('/admin_users_publish.php?id='.$row['id'].'&per_page='.$per_page);
+                        $status_link = base_url('/admin_users.php?action=publish&id='.$row['id'].'&per_page='.$per_page);
                     } ?>
                                 <div class="row gy-2">
                                     <div class="col-12 col-md-1">
@@ -143,22 +143,6 @@
                 }
             }
             ?>
-                                <!--  
-                                <div id="pagination" class="row gy-3">
-                                    <div class="col-12 col-sm-12 text-center">
-                                        <a class="btn btn-outline-secondary" href="#">ย้อนกลับ</a>
-                                        <a class="btn btn-primary" href="#">1</a>
-                                        <a class="btn btn-secondary" href="#">2</a>
-                                        <a class="btn btn-secondary" href="#">3</a>
-                                        <a class="btn btn-secondary" href="#">4</a>
-                                        <a class="btn btn-secondary" href="#">5</a>
-                                        <a class="btn btn-outline-secondary" href="#">หลังสุด</a>
-                                    </div>
-                                </div>
-                                <div id="table-footer">
-                                    <?php // echo $this->data['pagination']->create_links();?>
-                                </div>
-                                -->
                             </div>
                         </div>
                     </div>
