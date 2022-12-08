@@ -35,6 +35,14 @@
                                                 value="<?php echo $this->data['item']['title']; ?>" required />
                                         </div>
                                     </div>
+                                    <div class="row mb-4">
+                                        <label for="thumbnailLabel" class="col-sm-3 col-form-label form-label">รูปภาพประกอบ
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <input type="file" class="form-control" name="thumbnail" id="thumbnailLabel" />
+                                            <img src="/assets/img/admin_index.png" class="w-50 mt-2">
+                                        </div>
+                                    </div>
                                     <!-- End field: title -->
 
                                     <input type="hidden" name="id" value="<?php echo $this->data['item']['id']; ?>" />

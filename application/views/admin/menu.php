@@ -26,9 +26,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php echo ($this->data['active_menu'] == 'users') ? 'active' : ''; ?>"
-                    href="/admin_users.php">
-                    <i class="bi-person"></i> จัดการสมาชิกทั้งหมด
+                <a class="nav-link <?php echo ($this->data['active_menu'] == 'customer') ? 'active' : ''; ?>"
+                    href="/admin_customer.php">
+                    <i class="bi-person"></i> จัดการลูกค้า
                 </a>
             </li>
         </ul>

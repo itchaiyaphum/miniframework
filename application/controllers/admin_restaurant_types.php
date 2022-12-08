@@ -22,10 +22,10 @@ class Admin_restaurant_types extends Controller
         $this->app->view('footer');
     }
 
-    public function save()
+    public function edit()
     {
         $form_data = $this->app->input->post();
-        $id = $this->app->input->get_post('id');
+        $id = $this->app->input->get_post('id', 0);
 
         // set rules for validation data
         $this->app->form_validation->set_rules('title', 'ประเภทร้านอาหาร', 'required');
