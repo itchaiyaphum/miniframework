@@ -47,6 +47,13 @@ class Auth extends Base_app
         $this->app->view('footer');
     }
 
+    public function logout()
+    {
+        $this->app->auth_lib->logout();
+        redirect('/auth_login.php');
+    }
+
+    // @TODO: will delete this function
     public function register()
     {
         $this->_check_login();
@@ -95,12 +102,7 @@ class Auth extends Base_app
         $this->app->view('footer');
     }
 
-    public function logout()
-    {
-        $this->app->auth_lib->logout();
-        redirect('/auth_login.php');
-    }
-
+    // @TODO: will delete this function
     public function register_completed()
     {
         $this->_check_login();

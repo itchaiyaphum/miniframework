@@ -16,7 +16,7 @@ class App
         self::$instance = &$this;
     }
 
-    public function start($controller_name = 'homepage', $method = null, $params = [])
+    public function start($controller_name = 'homepage', $method = 'index', $params = [])
     {
         $this->_init_environment();
         $this->_init_base();
@@ -26,9 +26,7 @@ class App
         $this->_init_session();
         $this->_init_library();
 
-        if (empty($method)) {
-            $method = (isset($_GET['action'])) ? $_GET['action'] : 'index';
-        }
+        $method = (isset($_GET['action'])) ? $_GET['action'] : $method;
         $this->_init_controller($controller_name, $method, $params);
 
         return $this;
@@ -140,10 +138,19 @@ class App
         $this->library('users_lib');
         $this->library('profile_lib');
         $this->library('province_lib');
+
+        // admin
         $this->library('admin_users_lib');
         $this->library('admin_riders_lib');
         $this->library('admin_restaurant_types_lib');
         $this->library('admin_restaurants_lib');
+
+        // customer
+        $this->library('customer_profile_lib');
+        $this->library('customer_restaurants_lib');
+        $this->library('customer_cart_lib');
+        $this->library('customer_history_order_lib');
+        $this->library('customer_food_review_lib');
     }
 
     public static function &get_instance()

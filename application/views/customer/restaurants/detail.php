@@ -1,0 +1,1 @@
+views/restaurants/detail.php
