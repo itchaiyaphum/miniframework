@@ -3,4 +3,4 @@
 require_once 'application/core/app.php';
 
 $app = new App();
-$app->start('customer_profile', 'register');
+$app->start('customer_register');
