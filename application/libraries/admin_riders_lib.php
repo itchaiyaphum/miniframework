@@ -21,6 +21,16 @@ class Admin_riders_lib extends Library
         return $item;
     }
 
+    public function public_rider($rider_id = 0)
+    {
+        return true;
+    }
+
+    public function delete_rider($rider_id = 0)
+    {
+        return true;
+    }
+
     public function get_query_where($options)
     {
         $filter_search = $this->app->input->get_post('riders_filter_search');

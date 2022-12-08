@@ -53,6 +53,16 @@ class Admin_restaurants_lib extends Library
         return $item;
     }
 
+    public function publish_restaurant($restaurant_id = 0)
+    {
+        return true;
+    }
+
+    public function delete_restaurant($restaurant_id = 0)
+    {
+        return true;
+    }
+
     public function get_query_where($options)
     {
         $filter_search = $this->app->input->get_post('filter_search');

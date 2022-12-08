@@ -140,10 +140,11 @@ class App
         $this->library('province_lib');
 
         // admin
-        $this->library('admin_users_lib');
-        $this->library('admin_riders_lib');
+        $this->library('admin_profile_lib');
         $this->library('admin_restaurant_types_lib');
         $this->library('admin_restaurants_lib');
+        $this->library('admin_riders_lib');
+        $this->library('admin_customer_lib');
 
         // customer
         $this->library('customer_profile_lib');

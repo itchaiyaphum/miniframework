@@ -22,7 +22,7 @@ class Admin_restaurant_types extends Controller
         $this->app->view('footer');
     }
 
-    public function edit()
+    public function save()
     {
         $form_data = $this->app->input->post();
         $id = $this->app->input->get_post('id');
@@ -46,34 +46,6 @@ class Admin_restaurant_types extends Controller
         $this->app->view('nav', $data);
         $this->app->view('admin/restaurant_types/form', $data);
         $this->app->view('footer');
-    }
-
-    public function publish()
-    {
-        $id = $this->app->input->get_post('id');
-        $this->app->admin_restaurant_types_lib->publish('restaurant_types', $id);
-        redirect('/admin_restaurant_types.php');
-    }
-
-    public function unpublish()
-    {
-        $id = $this->app->input->get_post('id');
-        $this->app->admin_restaurant_types_lib->unpublish('restaurant_types', $id);
-        redirect('/admin_restaurant_types.php');
-    }
-
-    public function trash()
-    {
-        $id = $this->app->input->get_post('id');
-        $this->app->admin_restaurant_types_lib->trash('restaurant_types', $id);
-        redirect('/admin_restaurant_types.php');
-    }
-
-    public function restore()
-    {
-        $id = $this->app->input->get_post('id');
-        $this->app->admin_restaurant_types_lib->restore('restaurant_types', $id);
-        redirect('/admin_restaurant_types.php');
     }
 
     public function delete()
