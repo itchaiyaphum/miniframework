@@ -155,6 +155,13 @@ class App
         // rider
         $this->library('rider_profile_lib');
         $this->library('rider_order_delivery_lib');
+
+        // staff
+        $this->library('staff_profile_lib');
+        $this->library('staff_food_category_lib');
+        $this->library('staff_food_menus_lib');
+        $this->library('staff_ordering_lib');
+        $this->library('staff_reporting_lib');
     }
 
     public static function &get_instance()
