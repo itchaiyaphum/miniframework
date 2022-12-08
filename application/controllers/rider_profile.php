@@ -19,6 +19,7 @@ class Rider_profile extends Controller
         $data['title'] = 'แก้ไขข้อมูลส่วนตัว - ระบบสั่งอาหารออนไลน์';
 
         $this->app->view('header', $data);
+        $this->app->view('nav', $data);
         $this->app->view('rider/profile/profile', $data);
         $this->app->view('footer');
     }

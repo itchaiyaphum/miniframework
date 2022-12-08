@@ -1,6 +1,6 @@
 <?php
 
-class Rider_profile extends Base_app
+class Rider_register extends Base_app
 {
     public function index()
     {

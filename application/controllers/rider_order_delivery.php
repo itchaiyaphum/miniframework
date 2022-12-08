@@ -9,6 +9,7 @@ class Rider_order_delivery extends Base_app
         $data['items'] = $this->app->rider_order_delivery_lib->get_items();
 
         $this->app->view('header', $data);
+        $this->app->view('nav', $data);
         $this->app->view('rider/order_delivery/index', $data);
         $this->app->view('footer');
     }
@@ -31,6 +32,7 @@ class Rider_order_delivery extends Base_app
         $data['customer_detail'] = $this->app->rider_order_delivery_lib->customer_detail($customer_id);
 
         $this->app->view('header', $data);
+        $this->app->view('nav', $data);
         $this->app->view('rider/order_delivery/customer_detail', $data);
         $this->app->view('footer');
     }
