@@ -151,6 +151,10 @@ class App
         $this->library('customer_cart_lib');
         $this->library('customer_history_order_lib');
         $this->library('customer_food_review_lib');
+
+        // rider
+        $this->library('rider_profile_lib');
+        $this->library('rider_order_delivery_lib');
     }
 
     public static function &get_instance()

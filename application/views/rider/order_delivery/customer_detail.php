@@ -1,0 +1,1 @@
+views/rider/order_delivery/customer_detail.php
