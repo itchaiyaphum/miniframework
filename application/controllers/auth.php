@@ -1,6 +1,6 @@
 <?php
 
-class Auth extends Base_object
+class Auth extends Base_app
 {
     private function _check_login()
     {

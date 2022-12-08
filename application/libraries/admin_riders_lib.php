@@ -1,6 +1,6 @@
 <?php
 
-class Admin_riders_lib extends Base_library
+class Admin_riders_lib extends Library
 {
     public function get_items($options = [])
     {

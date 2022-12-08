@@ -1,6 +1,6 @@
 <?php
 
-class Admin_users_lib extends Base_library
+class Admin_users_lib extends Library
 {
     public function get_pagination()
     {

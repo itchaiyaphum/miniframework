@@ -1,6 +1,6 @@
 <?php
 
-class Session extends Base_object
+class Session extends Base_app
 {
     public function __construct($app)
     {

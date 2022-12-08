@@ -1,6 +1,6 @@
 <?php
 
-class Input extends Base_object
+class Input extends Base_app
 {
     // get input type get
     public function get($index = null, $default = null)

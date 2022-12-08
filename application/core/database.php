@@ -1,6 +1,6 @@
 <?php
 
-class Database extends Base_object
+class Database extends Base_app
 {
     public $db = null;
     public $result = null;
@@ -13,7 +13,7 @@ class Database extends Base_object
 
         // Check connection
         if ($conn->connect_error) {
-            exit('Connection failed: '.$conn->connect_error);
+            exit('ไม่สามารถเชื่อต่อฐานข้อมูลได้: '.$conn->connect_error);
         }
 
         $this->db = $conn;
@@ -50,7 +50,7 @@ class Database extends Base_object
     public function insert($table_name = null, $data = null)
     {
         if (empty($table_name) || empty($data)) {
-            exit('table or data is not set!');
+            exit('table / data ตั้งค่าไม่ครบถ้วน!');
         }
 
         // preparing data
@@ -73,7 +73,7 @@ class Database extends Base_object
     public function update($table_name = null, $data = null, $where = null)
     {
         if (empty($table_name) || empty($data) || empty($where)) {
-            exit('table or data is not set!');
+            exit('table / data / where ตั้งค่าไม่ครบถ้วน!');
         }
 
         // preparing data
@@ -96,7 +96,7 @@ class Database extends Base_object
     public function delete($table_name = null, $where = null)
     {
         if (empty($table_name) || empty($where)) {
-            exit('table or data is not set!');
+            exit('table / where ตั้งค่าไม่ครบถ้วน!');
         }
         // delete data to database
         $sql = "DELETE FROM {$table_name} WHERE {$where}";

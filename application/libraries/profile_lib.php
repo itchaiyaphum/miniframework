@@ -1,6 +1,6 @@
 <?php
 
-class Profile_lib extends Base_object
+class Profile_lib extends Library
 {
     public $id = 0;
     public $firstname = '';

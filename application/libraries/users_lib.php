@@ -1,6 +1,6 @@
 <?php
 
-class Users_lib extends Base_object
+class Users_lib extends Library
 {
     public function get_items()
     {

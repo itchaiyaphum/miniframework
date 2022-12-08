@@ -1,6 +1,6 @@
 <?php
 
-class Controller extends Base_object
+class Controller extends Base_app
 {
     public function __construct($app)
     {

@@ -1,6 +1,6 @@
 <?php
 
-class Form_validation extends Base_object
+class Form_validation extends Base_app
 {
     public $check_vars = [];
     public $error_status = false;

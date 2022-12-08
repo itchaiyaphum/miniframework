@@ -1,6 +1,6 @@
 <?php
 
-class Base_library extends Base_object
+class Library extends Base_app
 {
     public function publish($table_name = '', $id = 0)
     {

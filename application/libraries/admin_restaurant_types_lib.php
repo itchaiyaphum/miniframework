@@ -1,6 +1,6 @@
 <?php
 
-class Admin_restaurant_types_lib extends Base_library
+class Admin_restaurant_types_lib extends Library
 {
     public function save($form_data = null)
     {

@@ -1,6 +1,6 @@
 <?php
 
-class Province_lib extends Base_object
+class Province_lib extends Library
 {
     public function get_items()
     {

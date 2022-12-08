@@ -85,8 +85,8 @@ class App
         require_once APPPATH.DS.'config'.DS.$this->environment.'.php';
         $this->config = $config;
 
-        require_once APPPATH.DS.'core'.DS.'base_object.php';
-        require_once APPPATH.DS.'core'.DS.'base_library.php';
+        require_once APPPATH.DS.'core'.DS.'base_app.php';
+        require_once APPPATH.DS.'core'.DS.'library.php';
         require_once APPPATH.DS.'core'.DS.'controller.php';
         require_once APPPATH.DS.'core'.DS.'common.php';
     }

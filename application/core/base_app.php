@@ -1,6 +1,6 @@
 <?php
 
-class Base_object
+class Base_app
 {
     public $app = null;
 

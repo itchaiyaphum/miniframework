@@ -1,6 +1,6 @@
 <?php
 
-class Auth_lib extends Base_object
+class Auth_lib extends Library
 {
     public function is_login()
     {

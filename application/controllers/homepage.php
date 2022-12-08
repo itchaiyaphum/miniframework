@@ -1,6 +1,6 @@
 <?php
 
-class Homepage extends Base_object
+class Homepage extends Base_app
 {
     public function index()
     {
@@ -9,7 +9,7 @@ class Homepage extends Base_object
 
         $this->app->view('header', $data);
         $this->app->view('nav', $data);
-        $this->app->view('homepage', $data);
+        $this->app->view('pages/homepage', $data);
         $this->app->view('footer');
     }
 }
