@@ -1,10 +1,5 @@
 <ul class="nav flex-column">
     <li class="nav-item">
-        <a class="nav-link <?php echo ($this->data['active_menu'] == 'index') ? 'active' : ''; ?>" href="/staff.php">
-            <i class="bi-house"></i> หน้าหลัก (Home)
-        </a>
-    </li>
-    <li class="nav-item">
         <a class="nav-link <?php echo ($this->data['active_menu'] == 'food_category') ? 'active' : ''; ?>"
             href="/staff_food_category.php">
             <i class="bi-box"></i> หมวดหมู่อาหาร
@@ -19,7 +14,7 @@
     <li class="nav-item">
         <a class="nav-link <?php echo ($this->data['active_menu'] == 'ordering') ? 'active' : ''; ?>"
             href="/staff_ordering.php">
-            <i class="bi-minecart"></i> ออเดอร์อาหาร
+            <i class="bi-minecart"></i> รายการสั่งซื้ออาหาร
         </a>
     </li>
     <li class="nav-item">

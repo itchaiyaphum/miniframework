@@ -11,6 +11,7 @@ class Staff_reporting extends Controller
         $data['left_menu'] = $this->app->view('staff/menu', $data, true);
 
         $this->app->view('header', $data);
+        $this->app->view('nav', $data);
         $this->app->view('staff/reporting/index', $data);
         $this->app->view('footer');
     }

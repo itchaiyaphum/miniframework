@@ -10,7 +10,7 @@ class Profile_lib extends Library
     public $province_id = 0;
     public $zip_code = '';
     public $mobile_no = '';
-    public $user_type = 'customer';
+    public $user_type = '';
     public $status = 0;
     public $password = '';
 

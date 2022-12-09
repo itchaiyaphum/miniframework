@@ -4,6 +4,5 @@
             <div>แข่งขันทักษะประจำปีการศึกษา 2565</div>
         </div>
         <script src="/assets/js/bootstrap.bundle.min.js"></script>
-        </body>
-
-        </html>
+    </body>
+</html>

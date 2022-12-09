@@ -1,9 +1,20 @@
+<?php
+$edit_profile = '/';
+if ($this->profile_lib->get_user_type() == 'customer') {
+    $edit_profile = '/customer_profile.php';
+} elseif ($this->profile_lib->get_user_type() == 'staff') {
+    $edit_profile = '/staff_profile.php';
+} elseif ($this->profile_lib->get_user_type() == 'rider') {
+    $edit_profile = '/rider_profile.php';
+} elseif ($this->profile_lib->get_user_type() == 'admin') {
+    $edit_profile = '/admin_profile.php';
+}
+?>
 <header class="border-bottom sticky-top">
     <nav class="navbar bg-light p-0">
         <div class="container justify-content-between justify-sm-content-start">
             <a class="navbar-brand" href="/">
-                <img height="30" src="/assets/img/workflow-logo-indigo-600-mark-gray-800-text.svg"
-                    alt="Workshop For Beginners" />
+                <img height="30" src="/assets/img/workflow-logo-indigo-600-mark-gray-800-text.svg" />
             </a>
             <!-- start: responsive menu -->
             <button class="navbar-toggler m-2 d-sm-none" type="button" data-bs-toggle="offcanvas"
@@ -14,25 +25,26 @@
                 <ul class="list-group">
                     <li class="list-group-item">เมนูหลัก</li>
                     <li>
-                        <a class="list-group-item active" href="/"><i class="bi-house"></i> หน้าหลัก</a>
+                        <a class="list-group-item" href="/"><i class="bi-house"></i> หน้าหลัก</a>
                     </li>
-                    <li class="list-group-item">ผู้ใช้งาน</li>
+                    <?php
+                    if ($this->profile_lib->is_login()) {
+                        ?>
                     <li>
-                        <a class="list-group-item" href="/profile.php"><i class="bi-person-circle"></i>
-                            โปรไฟล์ของฉัน</a>
-                    </li>
-                    <li class="list-group-item">ตั้งค่าบัญชี</li>
-                    <li>
-                        <a class="list-group-item" href="/settings_profile.php"><i class="bi-pencil-square"></i>
+                        <a class="list-group-item" href="<?php echo $edit_profile; ?>">
+                            <i class="bi-pencil-square"></i>
                             แก้ไขข้อมูลส่วนตัว</a>
-                    </li>
-                    <li>
-                        <a class="list-group-item" href="/settings_password.php"><i class="bi-lock"></i>
-                            เปลี่ยนรหัสผ่าน</a>
                     </li>
                     <li>
                         <a class="list-group-item" href="/auth_logout.php"><i class="bi-power"></i> ออกจากระบบ</a>
                     </li>
+                    <?php
+                    } else {
+                        ?>
+                    <a class="list-group-item" href="/auth_login.php"><i class="bi-person"></i> เข้าสู่ระบบ</a>
+                    <?php
+                    }
+?>
                 </ul>
             </div>
             <!-- end: responsive menu -->
@@ -47,8 +59,8 @@
 
             <div class="dropdown dropstart d-none d-sm-flex">
                 <?php
-                if ($this->profile_lib->is_login()) {
-                    ?>
+if ($this->profile_lib->is_login()) {
+    ?>
                 <a href="#" class="d-block link-dark text-decoration-none" data-bs-toggle="dropdown"
                     aria-expanded="false">
                     <img src="/assets/img/profile.jpeg" width="30" height="30" class="rounded-circle" />
@@ -56,39 +68,13 @@
                 </a>
                 <ul class="dropdown-menu text-small">
                     <li>
-                        <a class="dropdown-item" href="/profile.php"><i class="bi-person-circle"></i>
+                        <a class="dropdown-item" href="/"><i class="bi-person-circle"></i>
                             <?php echo $this->profile_lib->firstname.' '.$this->profile_lib->lastname; ?></a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="/settings_profile.php"><i class="bi-pencil-square"></i>
+                        <a class="dropdown-item" href="<?php echo $edit_profile; ?>"><i class="bi-pencil-square"></i>
                             แก้ไขข้อมูลส่วนตัว</a>
                     </li>
-                    <li>
-                        <a class="dropdown-item" href="/settings_password.php"><i class="bi-lock"></i>
-                            เปลี่ยนรหัสผ่าน</a>
-                    </li>
-
-                    <?php
-                    if ($this->profile_lib->get_user_type() == 'admin') {
-                        echo '<li><hr class="dropdown-divider" /></li>';
-                        echo '<a class="dropdown-item" href="/admin.php"><i class="bi-person"></i> ระบบบริหารจัดการหลังบ้าน</a>';
-                    }
-                    ?>
-
-                    <?php
-                    if ($this->profile_lib->get_user_type() == 'staff') {
-                        echo '<li><hr class="dropdown-divider" /></li>';
-                        echo '<a class="dropdown-item" href="/staff.php"><i class="bi-person"></i> สำหรับผู้ดูแลร้านอาหาร</a>';
-                    }
-                    ?>
-
-                    <?php
-                    if ($this->profile_lib->get_user_type() == 'rider') {
-                        echo '<li><hr class="dropdown-divider" /></li>';
-                        echo '<a class="dropdown-item" href="/rider.php"><i class="bi-person"></i> สำหรับผู้ส่งอาหาร</a>';
-                    }
-                    ?>
-                    
                     <li>
                         <hr class="dropdown-divider" />
                     </li>

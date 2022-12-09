@@ -5,10 +5,6 @@
                     <img style="width: 50px" src="/assets/img/workflow-mark-indigo-600.svg" />
                 </div>
                 <h2>ลงชื่อเข้าสู่ระบบ</h2>
-                <p>
-                    หรือ
-                    <a href="/auth_register.php" class=""> สมัครสมาชิกใหม่ </a>
-                </p>
             </div>
         </div>
 
