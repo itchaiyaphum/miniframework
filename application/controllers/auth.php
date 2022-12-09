@@ -7,9 +7,9 @@ class Auth extends Base_app
         $auth = $this->app->library('auth_lib');
         $profile = $this->app->library('profile_lib');
 
-        if ($auth->is_login()) {
-            redirect('/');
-        }
+        // if ($auth->is_login()) {
+        //     redirect('/');
+        // }
     }
 
     public function index()

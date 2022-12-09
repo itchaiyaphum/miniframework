@@ -5,7 +5,7 @@ class Admin_customer extends Controller
     public function __construct($app)
     {
         parent::__construct($app);
-        $this->_check_admin();
+        // $this->_check_admin();
     }
 
     public function index()

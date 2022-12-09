@@ -19,6 +19,7 @@ class Staff_profile extends Controller
         $data['title'] = 'แก้ไขข้อมูลส่วนตัว - ระบบสั่งอาหารออนไลน์';
 
         $this->app->view('header', $data);
+        $this->app->view('nav', $data);
         $this->app->view('staff/profile/profile', $data);
         $this->app->view('footer');
     }

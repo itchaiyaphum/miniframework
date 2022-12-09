@@ -5,13 +5,13 @@ class Controller extends Base_app
     public function __construct($app)
     {
         parent::__construct($app);
-        $this->_check_login();
+        // $this->_check_login();
     }
 
     private function _check_login()
     {
         if (!$this->app->auth_lib->is_login()) {
-            redirect('/auth_login.php');
+            // redirect('/auth_login.php');
         }
     }
 
@@ -20,7 +20,7 @@ class Controller extends Base_app
         $profile = $this->app->profile_lib->get_profile();
 
         if ($profile->user_type != 'admin') {
-            redirect('/');
+            // redirect('/');
         }
     }
 
@@ -29,7 +29,7 @@ class Controller extends Base_app
         $profile = $this->app->profile_lib->get_profile();
 
         if ($profile->user_type != 'staff') {
-            redirect('/');
+            // redirect('/');
         }
     }
 }
