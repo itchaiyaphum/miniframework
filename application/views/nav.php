@@ -27,6 +27,9 @@ if ($this->profile_lib->get_user_type() == 'customer') {
                     <li>
                         <a class="list-group-item" href="/"><i class="bi-house"></i> หน้าหลัก</a>
                     </li>
+                    <li>
+                        <a class="list-group-item" href="/about.php"><i class="bi-house"></i> เกี่ยวกับเรา</a>
+                    </li>
                     <?php
                     if ($this->profile_lib->is_login()) {
                         ?>
@@ -51,8 +54,11 @@ if ($this->profile_lib->get_user_type() == 'customer') {
 
             <div class="d-none d-sm-flex flex-grow-1">
                 <ul class="nav flex-row">
-                    <li class="nav-item active">
+                    <li class="nav-item <?php echo ($this->data['active_menu'] == 'homepage') ? 'active' : ''; ?>">
                         <a href="/" class="nav-link">หน้าหลัก</a>
+                    </li>
+                    <li class="nav-item <?php echo ($this->data['active_menu'] == 'about') ? 'active' : ''; ?>">
+                        <a href="/about.php" class="nav-link">เกี่ยวกับเรา</a>
                     </li>
                 </ul>
             </div>

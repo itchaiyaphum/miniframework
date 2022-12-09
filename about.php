@@ -3,4 +3,4 @@
 require_once 'application/core/app.php';
 
 $app = new App();
-$app->start('pages', 'homepage');
+$app->start('pages', 'about');
