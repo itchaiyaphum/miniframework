@@ -14,7 +14,7 @@ if ($this->profile_lib->get_user_type() == 'customer') {
     <nav class="navbar bg-light p-0">
         <div class="container justify-content-between justify-sm-content-start">
             <a class="navbar-brand" href="/">
-                <img height="30" src="/assets/img/workflow-logo-indigo-600-mark-gray-800-text.svg" />
+                ระบบสั่งอาหารออนไลน์
             </a>
             <!-- start: responsive menu -->
             <button class="navbar-toggler m-2 d-sm-none" type="button" data-bs-toggle="offcanvas"
