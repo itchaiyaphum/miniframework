@@ -7,8 +7,11 @@ class Customer_cart extends Controller
         $data = [];
         $data['title'] = 'แสดงตะกร้าสินค้า - ระบบสั่งอาหารออนไลน์';
         $data['items'] = $this->app->customer_cart_lib->get_items();
+        $data['active_menu'] = 'cart';
+        $data['left_menu'] = $this->app->view('customer/menu', $data, true);
 
         $this->app->view('header', $data);
+        $this->app->view('nav', $data);
         $this->app->view('customer/cart/index', $data);
         $this->app->view('footer');
     }

@@ -1,0 +1,22 @@
+<div class="card mb-3 mt-3 d-none d-sm-flex">
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <a class="nav-link <?php echo ($this->data['active_menu'] == 'restaurants') ? 'active' : ''; ?>"
+                href="/customer_restaurants.php">
+                <i class="bi-box"></i> แสดงร้านอาหารทั้งหมด
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link <?php echo ($this->data['active_menu'] == 'cart') ? 'active' : ''; ?>"
+                href="/customer_cart.php">
+                <i class="bi-shop"></i> ตะกร้าสินค้าทั้งหมด
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link <?php echo ($this->data['active_menu'] == 'history_order') ? 'active' : ''; ?>"
+                href="/customer_history_order.php">
+                <i class="bi-car-front"></i> ประวัติการสั่งซื้ออาหาร
+            </a>
+        </li>
+    </ul>
+</div>
