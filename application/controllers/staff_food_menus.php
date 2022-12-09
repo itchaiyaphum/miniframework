@@ -5,7 +5,7 @@ class Staff_food_menus extends Controller
     public function __construct($app)
     {
         parent::__construct($app);
-        $this->_check_staff();
+        // $this->_check_staff();
     }
 
     public function index()
