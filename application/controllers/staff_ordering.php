@@ -7,8 +7,11 @@ class Staff_ordering extends Controller
         $data = [];
         $data['title'] = 'รายการสั่งซื้ออาหาร - ระบบสั่งอาหารออนไลน์';
         $data['items'] = $this->app->staff_ordering_lib->get_items();
+        $data['active_menu'] = 'ordering';
+        $data['left_menu'] = $this->app->view('staff/menu', $data, true);
 
         $this->app->view('header', $data);
+        $this->app->view('nav', $data);
         $this->app->view('staff/ordering/index', $data);
         $this->app->view('footer');
     }
@@ -31,6 +34,6 @@ class Staff_ordering extends Controller
 
         $this->app->view('header', $data);
         $this->app->view('staff/ordering/invoice', $data);
-        $this->app->view('footer');
+        $this->app->view('footer_print');
     }
 }
