@@ -20,7 +20,18 @@ class Controller extends Base_app
         $profile = $this->app->profile_lib->get_profile();
 
         if ($profile->user_type != 'admin') {
-            // redirect('/');
+            // redirect('/admin.php');
+            return true;
+        }
+    }
+
+    public function _check_customer()
+    {
+        $profile = $this->app->profile_lib->get_profile();
+
+        if ($profile->user_type != 'customer') {
+            // redirect('/customer.php');
+            return true;
         }
     }
 
@@ -29,7 +40,18 @@ class Controller extends Base_app
         $profile = $this->app->profile_lib->get_profile();
 
         if ($profile->user_type != 'staff') {
-            // redirect('/');
+            // redirect('/staff.php');
+            return true;
+        }
+    }
+
+    public function _check_rider()
+    {
+        $profile = $this->app->profile_lib->get_profile();
+
+        if ($profile->user_type != 'rider') {
+            // redirect('/rider.php');
+            return true;
         }
     }
 }

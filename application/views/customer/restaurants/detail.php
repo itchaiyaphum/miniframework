@@ -6,13 +6,13 @@
         </div>
         <div class="row">
             <div class="col-lg-3">
-
                 <!-- start: left menu -->
-                <?php echo $this->data['left_menu']; ?>
+                <div class="card mb-3 mt-3 d-none d-sm-flex">
+                    <?php echo $this->data['left_menu']; ?>
+                </div>
                 <!-- end: left menu -->
 
                 <!-- start: food categories -->
-
                 <div class="card mb-3 mt-3 d-none d-sm-flex">
                     <div class="card-header">
                         หมวดหมู่อาหาร
@@ -51,8 +51,8 @@
                     </ul>
                 </div>
                 <!-- end: food categories -->
-
             </div>
+
 
 
             <!-- start: main content -->
@@ -79,7 +79,7 @@
                         </div>
                         <?php
                         }
-                ?>
+                    ?>
                     </div>
                     <!-- end: menus -->
 
@@ -89,16 +89,16 @@
                     </div>
                     <div>
                         <?php
-                        for ($i = 0; $i < 10; ++$i) {
-                            ?>
+                            for ($i = 0; $i < 10; ++$i) {
+                                ?>
                         <div class="border p-2 mt-2">
                             <h4>AODTO WK</h4>
                             <h6>2022/12/13 12:00:34</h6>
                             <div class="mt-2">สมคำลำรือกับร้านจริงๆครับ</div>
                         </div>
                         <?php
-                        }
-                ?>
+                            }
+                    ?>
                     </div>
                     <!-- end: reviews -->
 

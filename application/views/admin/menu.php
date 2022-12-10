@@ -4,7 +4,7 @@
             <li class="nav-item">
                 <a class="nav-link <?php echo ($this->data['active_menu'] == 'index') ? 'active' : ''; ?>"
                     href="/admin.php">
-                    <i class="bi-house"></i> หน้าหลัก (Home)
+                    <i class="bi-house"></i> หน้าแรก
                 </a>
             </li>
             <li class="nav-item">

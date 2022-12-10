@@ -7,6 +7,8 @@ class Rider_order_delivery extends Base_app
         $data = [];
         $data['title'] = 'รายการอาหารที่รอจัดส่ง - ระบบสั่งอาหารออนไลน์';
         $data['items'] = $this->app->rider_order_delivery_lib->get_items();
+        $data['active_menu'] = 'order_delivery';
+        $data['left_menu'] = $this->app->view('rider/menu', $data, true);
 
         $this->app->view('header', $data);
         $this->app->view('nav', $data);
@@ -30,6 +32,8 @@ class Rider_order_delivery extends Base_app
         $data = [];
         $data['title'] = 'รายละเอียดลูกค้า - ระบบสั่งอาหารออนไลน์';
         $data['customer_detail'] = $this->app->rider_order_delivery_lib->customer_detail($customer_id);
+        $data['active_menu'] = 'order_delivery';
+        $data['left_menu'] = $this->app->view('rider/menu', $data, true);
 
         $this->app->view('header', $data);
         $this->app->view('nav', $data);

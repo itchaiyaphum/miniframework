@@ -32,6 +32,18 @@ class Auth extends Base_app
                     redirect('/admin.php');
 
                     return true;
+                } elseif ($this->app->session_lib->get('user_type') == 'customer') {
+                    redirect('/customer.php');
+
+                    return true;
+                } elseif ($this->app->session_lib->get('user_type') == 'rider') {
+                    redirect('/rider.php');
+
+                    return true;
+                } elseif ($this->app->session_lib->get('user_type') == 'staff') {
+                    redirect('/staff.php');
+
+                    return true;
                 }
                 redirect('/');
             }
