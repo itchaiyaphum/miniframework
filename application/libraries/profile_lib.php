@@ -7,12 +7,16 @@ class Profile_lib extends Library
     public $lastname = '';
     public $email = '';
     public $address = '';
-    public $province_id = 0;
-    public $zip_code = '';
+    public $thumbnail = '';
     public $mobile_no = '';
     public $user_type = '';
     public $status = 0;
     public $password = '';
+
+    public $restaurant_name = '';
+    public $restaurant_type_id = 0;
+    public $restaurant_address = 0;
+    public $restaurant_thumbnail = 0;
 
     public function __construct($app)
     {
