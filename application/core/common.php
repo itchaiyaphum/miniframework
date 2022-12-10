@@ -16,6 +16,11 @@ function base_url($url = '')
     return $base_url.$url;
 }
 
+function active_menu($data = null, $index = null)
+{
+    return ($data == $index) ? 'active' : '';
+}
+
 function redirect($url = '/')
 {
     header('Location: '.base_url($url));

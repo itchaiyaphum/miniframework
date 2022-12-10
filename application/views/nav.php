@@ -9,11 +9,23 @@ if ($this->profile_lib->get_user_type() == 'customer') {
 } elseif ($this->profile_lib->get_user_type() == 'admin') {
     $edit_profile = '/admin_profile.php';
 }
+
+$is_login = $this->profile_lib->is_login();
+$firstname = $this->profile_lib->firstname;
+$lastname = $this->profile_lib->lastname;
+$thumbnail = $this->profile_lib->thumbnail;
+
+$link_homepage = '/';
+$link_about = '/about.php';
+
+$link_login = '/auth_login.php';
+$link_logout = '/auth_logout.php';
+
 ?>
 <header class="border-bottom sticky-top">
     <nav class="navbar bg-light p-0">
         <div class="container justify-content-between justify-sm-content-start">
-            <a class="navbar-brand" href="/">
+            <a class="navbar-brand" href="<?php echo $link_homepage; ?>">
                 ระบบสั่งอาหารออนไลน์
             </a>
             <!-- start: responsive menu -->
@@ -25,13 +37,15 @@ if ($this->profile_lib->get_user_type() == 'customer') {
                 <ul class="list-group">
                     <li class="list-group-item">เมนูหลัก</li>
                     <li>
-                        <a class="list-group-item" href="/"><i class="bi-house"></i> หน้าหลัก</a>
+                        <a class="list-group-item" href="<?php echo $link_homepage; ?>"><i class="bi-house"></i>
+                            หน้าหลัก</a>
                     </li>
                     <li>
-                        <a class="list-group-item" href="/about.php"><i class="bi-house"></i> เกี่ยวกับเรา</a>
+                        <a class="list-group-item" href="<?php echo $link_about; ?>"><i class="bi-house"></i>
+                            เกี่ยวกับเรา</a>
                     </li>
                     <?php
-                    if ($this->profile_lib->is_login()) {
+                    if ($is_login) {
                         ?>
                     <li>
                         <a class="list-group-item" href="<?php echo $edit_profile; ?>">
@@ -39,12 +53,14 @@ if ($this->profile_lib->get_user_type() == 'customer') {
                             แก้ไขข้อมูลส่วนตัว</a>
                     </li>
                     <li>
-                        <a class="list-group-item" href="/auth_logout.php"><i class="bi-power"></i> ออกจากระบบ</a>
+                        <a class="list-group-item" href="<?php echo $link_logout; ?>"><i class="bi-power"></i>
+                            ออกจากระบบ</a>
                     </li>
                     <?php
                     } else {
                         ?>
-                    <a class="list-group-item" href="/auth_login.php"><i class="bi-person"></i> เข้าสู่ระบบ</a>
+                    <a class="list-group-item" href="<?php echo $link_login; ?>"><i class="bi-person"></i>
+                        เข้าสู่ระบบ</a>
                     <?php
                     }
 ?>
@@ -54,28 +70,28 @@ if ($this->profile_lib->get_user_type() == 'customer') {
 
             <div class="d-none d-sm-flex flex-grow-1">
                 <ul class="nav flex-row">
-                    <li class="nav-item <?php echo ($this->data['active_menu'] == 'homepage') ? 'active' : ''; ?>">
-                        <a href="/" class="nav-link">หน้าหลัก</a>
+                    <li class="nav-item <?php echo active_menu($this->data['active_menu'], 'homepage'); ?>">
+                        <a href="<?php echo $link_homepage; ?>" class="nav-link">หน้าหลัก</a>
                     </li>
-                    <li class="nav-item <?php echo ($this->data['active_menu'] == 'about') ? 'active' : ''; ?>">
-                        <a href="/about.php" class="nav-link">เกี่ยวกับเรา</a>
+                    <li class="nav-item <?php echo active_menu($this->data['active_menu'], 'about'); ?>">
+                        <a href="<?php echo $link_about; ?>" class="nav-link">เกี่ยวกับเรา</a>
                     </li>
                 </ul>
             </div>
 
             <div class="dropdown dropstart d-none d-sm-flex">
                 <?php
-if ($this->profile_lib->is_login()) {
-    ?>
+                if ($is_login) {
+                    ?>
                 <a href="#" class="d-block link-dark text-decoration-none" data-bs-toggle="dropdown"
                     aria-expanded="false">
-                    <img src="/assets/img/profile.jpeg" width="30" height="30" class="rounded-circle" />
+                    <img src="<?php echo $thumbnail; ?>" width="30" height="30" class="rounded-circle" />
                     <span class="position-absolute translate-middle rounded-circle profile-online"></span>
                 </a>
                 <ul class="dropdown-menu text-small">
                     <li>
                         <a class="dropdown-item" href="/"><i class="bi-person-circle"></i>
-                            <?php echo $this->profile_lib->firstname.' '.$this->profile_lib->lastname; ?></a>
+                            <?php echo $firstname.' '.$lastname; ?></a>
                     </li>
                     <li>
                         <a class="dropdown-item" href="<?php echo $edit_profile; ?>"><i class="bi-pencil-square"></i>
@@ -85,12 +101,14 @@ if ($this->profile_lib->is_login()) {
                         <hr class="dropdown-divider" />
                     </li>
                     <li>
-                        <a class="dropdown-item" href="/auth_logout.php"><i class="bi-power"></i> ออกจากระบบ</a>
+                        <a class="dropdown-item" href="<?php echo $link_logout; ?>"><i class="bi-power"></i>
+                            ออกจากระบบ</a>
                     </li>
                 </ul>
                 <?php } else {
                     ?>
-                <a class="btn btn-primary" href="/auth_login.php"><i class="bi-person"></i> ลงชื่อเข้าสู่ระบบ</a>
+                <a class="btn btn-primary" href="<?php echo $link_login; ?>"><i class="bi-person"></i>
+                    ลงชื่อเข้าสู่ระบบ</a>
                 <?php
                 } ?>
             </div>
