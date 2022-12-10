@@ -2,18 +2,10 @@
 
 class Customer_profile_lib extends Library
 {
-    // ตรวจสอบว่ามีอีเมล์ในระบบ database อยู่หรือไม่
-    private function _check_email_exists($email = null)
-    {
-        $query = $this->app->database_lib->query("SELECT * FROM `users` WHERE `email`='{$email}'");
-
-        return (!empty($query->result())) ? true : false;
-    }
-
     public function register($register_data = [])
     {
         // หากมี อีเมล์ อยู่ในระบบแล้ว
-        if ($this->_check_email_exists($register_data['email'])) {
+        if ($this->app->auth_lib->check_email_exists($register_data['email'])) {
             $this->app->form_validation_lib->set_error("อีเมล์ ({$register_data['email']}) นี้ถูกใช้ในการลงทะเบียนแล้ว กรุณาใช้อีเมล์อื่น!");
 
             return false;
