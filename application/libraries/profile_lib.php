@@ -27,9 +27,9 @@ class Profile_lib extends Library
 
     public function get_profile($email = null)
     {
-        (!empty($email)) or $email = $this->app->session->get('email');
+        (!empty($email)) or $email = $this->app->session_lib->get('email');
 
-        $query = $this->app->db->query('SELECT * FROM users WHERE email="'.$email.'"');
+        $query = $this->app->database_lib->query('SELECT * FROM users WHERE email="'.$email.'"');
         $result = $query->row();
 
         if (!empty($result)) {
@@ -43,7 +43,7 @@ class Profile_lib extends Library
 
     public function get_profile_by_id($id = 0)
     {
-        $query = $this->app->db->query("SELECT * FROM users WHERE id={$id}");
+        $query = $this->app->database_lib->query("SELECT * FROM users WHERE id={$id}");
         $result = $query->row();
 
         if (!empty($result)) {
@@ -75,7 +75,7 @@ class Profile_lib extends Library
         $where = 'id='.$profile_data['id'];
 
         // insert register data to database
-        return $this->app->db->update('users', $data, $where);
+        return $this->app->database_lib->update('users', $data, $where);
     }
 
     public function change_password($profile_data = [])
@@ -89,14 +89,14 @@ class Profile_lib extends Library
 
         // check current_password is correct
         if ($profile->password != $hash_current_password) {
-            $this->app->form_validation->set_error('คุณกรอกรหัสผ่านปัจจุบันไม่ถูกต้อง, กรุณาลองใหม่อีกครั้ง!');
+            $this->app->form_validation_lib->set_error('คุณกรอกรหัสผ่านปัจจุบันไม่ถูกต้อง, กรุณาลองใหม่อีกครั้ง!');
 
             return false;
         }
 
         // check new_password match confirm_new_password
         if ($hash_new_password != $hash_confirm_new_password) {
-            $this->app->form_validation->set_error('รหัสผ่านใหม่ ไม่ตรงกับ ยืนยันรหัสผ่านใหม่, กรุณาลองใหม่อีกครั้ง!');
+            $this->app->form_validation_lib->set_error('รหัสผ่านใหม่ ไม่ตรงกับ ยืนยันรหัสผ่านใหม่, กรุณาลองใหม่อีกครั้ง!');
 
             return false;
         }
@@ -110,7 +110,7 @@ class Profile_lib extends Library
         $where = 'id='.$profile_data['id'];
 
         // insert register data to database
-        return $this->app->db->update('users', $data, $where);
+        return $this->app->database_lib->update('users', $data, $where);
     }
 
     public function get_user_type()

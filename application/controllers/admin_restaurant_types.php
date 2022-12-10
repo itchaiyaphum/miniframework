@@ -24,14 +24,14 @@ class Admin_restaurant_types extends Controller
 
     public function edit()
     {
-        $form_data = $this->app->input->post();
-        $id = $this->app->input->get_post('id', 0);
+        $form_data = $this->app->input_lib->post();
+        $id = $this->app->input_lib->get_post('id', 0);
 
         // set rules for validation data
-        $this->app->form_validation->set_rules('title', 'ประเภทร้านอาหาร', 'required');
+        $this->app->form_validation_lib->set_rules('title', 'ประเภทร้านอาหาร', 'required');
 
         // run validation
-        if ($this->app->form_validation->run()) {
+        if ($this->app->form_validation_lib->run()) {
             $this->app->admin_restaurant_types_lib->save($form_data);
             redirect('/admin_restaurant_types.php');
         }
@@ -50,7 +50,7 @@ class Admin_restaurant_types extends Controller
 
     public function delete()
     {
-        $id = $this->app->input->get_post('id');
+        $id = $this->app->input_lib->get_post('id');
         $this->app->admin_restaurant_types_lib->delete('restaurant_types', $id);
         redirect('/admin_restaurant_types.php');
     }

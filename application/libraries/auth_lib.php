@@ -4,7 +4,7 @@ class Auth_lib extends Library
 {
     public function is_login()
     {
-        $is_login = $this->app->session->get('is_login', false);
+        $is_login = $this->app->session_lib->get('is_login', false);
         if ($is_login == true || $is_login == 1) {
             return true;
         }
@@ -16,7 +16,7 @@ class Auth_lib extends Library
     {
         $hash_password = md5($password);
 
-        $query = $this->app->db->query('SELECT * FROM users');
+        $query = $this->app->database_lib->query('SELECT * FROM users');
         $results = $query->result();
 
         if (count($results)) {
@@ -29,7 +29,7 @@ class Auth_lib extends Library
             }
         }
 
-        $this->app->form_validation->set_error('อีเมล์ หรือ รหัสผ่าน ไม่ถูกต้อง, กรุณาลองใหม่อีกครั้ง!');
+        $this->app->form_validation_lib->set_error('อีเมล์ หรือ รหัสผ่าน ไม่ถูกต้อง, กรุณาลองใหม่อีกครั้ง!');
 
         return false;
     }
@@ -38,7 +38,7 @@ class Auth_lib extends Library
     {
         // check email exists
         if ($this->_check_email_exists($register_data['email'])) {
-            $this->app->form_validation->set_error("อีเมล์ ({$register_data['email']}) นี้ถูกใช้ในการลงทะเบียนแล้ว กรุณาใช้อีเมล์อื่น!");
+            $this->app->form_validation_lib->set_error("อีเมล์ ({$register_data['email']}) นี้ถูกใช้ในการลงทะเบียนแล้ว กรุณาใช้อีเมล์อื่น!");
 
             return false;
         }
@@ -58,19 +58,19 @@ class Auth_lib extends Library
         ];
 
         // insert register data to database
-        return $this->app->db->insert('users', $data);
+        return $this->app->database_lib->insert('users', $data);
     }
 
     // external call for set login session
     public function set_login_session($profile)
     {
-        $this->app->session->set('is_login', true);
-        $this->app->session->set('profile_id', $profile->id);
-        $this->app->session->set('email', $profile->email);
-        $this->app->session->set('firstname', $profile->firstname);
-        $this->app->session->set('lastname', $profile->lastname);
-        $this->app->session->set('status', $profile->status);
-        $this->app->session->set('user_type', $profile->user_type);
+        $this->app->session_lib->set('is_login', true);
+        $this->app->session_lib->set('profile_id', $profile->id);
+        $this->app->session_lib->set('email', $profile->email);
+        $this->app->session_lib->set('firstname', $profile->firstname);
+        $this->app->session_lib->set('lastname', $profile->lastname);
+        $this->app->session_lib->set('status', $profile->status);
+        $this->app->session_lib->set('user_type', $profile->user_type);
     }
 
     // internal call for set login session by email
@@ -95,12 +95,12 @@ class Auth_lib extends Library
 
     public function logout()
     {
-        return $this->app->session->destroy();
+        return $this->app->session_lib->destroy();
     }
 
     private function _check_email_exists($email = null)
     {
-        $query = $this->app->db->query("SELECT * FROM users WHERE email='{$email}'");
+        $query = $this->app->database_lib->query("SELECT * FROM users WHERE email='{$email}'");
 
         return (!empty($query->result())) ? true : false;
     }

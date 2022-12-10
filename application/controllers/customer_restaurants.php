@@ -18,7 +18,7 @@ class Customer_restaurants extends Controller
 
     public function detail()
     {
-        $cate_id = $this->app->input->get_post('cate_id', 1);
+        $cate_id = $this->app->input_lib->get_post('cate_id', 1);
         $data = [];
         $data['title'] = 'รายละเอียดร้านอาหาร - ระบบสั่งอาหารออนไลน์';
         $data['active_menu'] = 'restaurants';

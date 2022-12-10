@@ -19,7 +19,7 @@ class Admin_restaurants_lib extends Library
                 'updated_at' => now(),
             ];
 
-            return $this->app->db->insert('restaurants', $data);
+            return $this->app->database_lib->insert('restaurants', $data);
         }
         // update data
         else {
@@ -30,7 +30,7 @@ class Admin_restaurants_lib extends Library
             ];
             $where = 'id='.$form_data['id'];
 
-            return $this->app->db->update('restaurants', $data, $where);
+            return $this->app->database_lib->update('restaurants', $data, $where);
         }
     }
 
@@ -38,7 +38,7 @@ class Admin_restaurants_lib extends Library
     {
         $where = $this->get_query_where($options);
         $sql = "SELECT * FROM restaurants WHERE {$where}";
-        $query = $this->app->db->query($sql);
+        $query = $this->app->database_lib->query($sql);
         $items = $query->result();
 
         return $items;
@@ -47,7 +47,7 @@ class Admin_restaurants_lib extends Library
     public function get_item($id = 0)
     {
         $sql = "SELECT * FROM restaurants WHERE id={$id}";
-        $query = $this->app->db->query($sql);
+        $query = $this->app->database_lib->query($sql);
         $item = $query->row();
 
         return $item;
@@ -65,8 +65,8 @@ class Admin_restaurants_lib extends Library
 
     public function get_query_where($options)
     {
-        $filter_search = $this->app->input->get_post('filter_search');
-        $filter_status = $this->app->input->get_post('filter_status');
+        $filter_search = $this->app->input_lib->get_post('filter_search');
+        $filter_status = $this->app->input_lib->get_post('filter_status');
 
         $wheres = [];
 

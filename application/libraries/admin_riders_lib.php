@@ -6,7 +6,7 @@ class Admin_riders_lib extends Library
     {
         $where = $this->get_query_where($options);
         $sql = "SELECT * FROM users WHERE {$where}";
-        $query = $this->app->db->query($sql);
+        $query = $this->app->database_lib->query($sql);
         $items = $query->result();
 
         return $items;
@@ -15,7 +15,7 @@ class Admin_riders_lib extends Library
     public function get_item($id = 0)
     {
         $sql = "SELECT * FROM users WHERE id={$id}";
-        $query = $this->app->db->query($sql);
+        $query = $this->app->database_lib->query($sql);
         $item = $query->row();
 
         return $item;
@@ -33,8 +33,8 @@ class Admin_riders_lib extends Library
 
     public function get_query_where($options)
     {
-        $filter_search = $this->app->input->get_post('riders_filter_search');
-        $filter_status = $this->app->input->get_post('riders_filter_status');
+        $filter_search = $this->app->input_lib->get_post('riders_filter_search');
+        $filter_status = $this->app->input_lib->get_post('riders_filter_status');
 
         $wheres = [];
 

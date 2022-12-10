@@ -17,18 +17,18 @@ class Auth extends Base_app
         $this->_check_login();
 
         // get data from login_form
-        $email = $this->app->input->get_post('email', '');
-        $password = $this->app->input->get_post('password', '');
+        $email = $this->app->input_lib->get_post('email', '');
+        $password = $this->app->input_lib->get_post('password', '');
 
         // set rules for validation data
-        $this->app->form_validation->set_rules('email', 'อีเมล์', 'required');
-        $this->app->form_validation->set_rules('password', 'รหัสผ่าน', 'required');
+        $this->app->form_validation_lib->set_rules('email', 'อีเมล์', 'required');
+        $this->app->form_validation_lib->set_rules('password', 'รหัสผ่าน', 'required');
 
         // run validation
-        if ($this->app->form_validation->run()) {
+        if ($this->app->form_validation_lib->run()) {
             // check login
             if ($this->app->auth_lib->login($email, $password)) {
-                if ($this->app->session->get('user_type') == 'admin') {
+                if ($this->app->session_lib->get('user_type') == 'admin') {
                     redirect('/admin.php');
 
                     return true;
@@ -59,28 +59,28 @@ class Auth extends Base_app
         $this->_check_login();
 
         // get data from login_form
-        $register_data = $this->app->input->post();
+        $register_data = $this->app->input_lib->post();
 
-        $firstname = $this->app->input->post('firstname');
-        $lastname = $this->app->input->post('lastname');
-        $user_type = $this->app->input->post('user_type');
-        $email = $this->app->input->post('email');
-        $password = $this->app->input->post('password');
-        $confirm_password = $this->app->input->post('confirm_password');
+        $firstname = $this->app->input_lib->post('firstname');
+        $lastname = $this->app->input_lib->post('lastname');
+        $user_type = $this->app->input_lib->post('user_type');
+        $email = $this->app->input_lib->post('email');
+        $password = $this->app->input_lib->post('password');
+        $confirm_password = $this->app->input_lib->post('confirm_password');
 
         // set rules for validation data
-        $this->app->form_validation->set_rules('firstname', 'ชื่อ', 'required');
-        $this->app->form_validation->set_rules('lastname', 'นามสกุล', 'required');
-        $this->app->form_validation->set_rules('user_type', 'ประเภทผู้ใช้งาน', 'required');
-        $this->app->form_validation->set_rules('email', 'อีเมล์', 'required');
-        $this->app->form_validation->set_rules('password', 'รหัสผ่าน', 'required');
-        $this->app->form_validation->set_rules('confirm_password', 'ยืนยันรหัสผ่าน', 'required');
+        $this->app->form_validation_lib->set_rules('firstname', 'ชื่อ', 'required');
+        $this->app->form_validation_lib->set_rules('lastname', 'นามสกุล', 'required');
+        $this->app->form_validation_lib->set_rules('user_type', 'ประเภทผู้ใช้งาน', 'required');
+        $this->app->form_validation_lib->set_rules('email', 'อีเมล์', 'required');
+        $this->app->form_validation_lib->set_rules('password', 'รหัสผ่าน', 'required');
+        $this->app->form_validation_lib->set_rules('confirm_password', 'ยืนยันรหัสผ่าน', 'required');
 
         if ($password != $confirm_password) {
-            $this->app->form_validation->set_error('รหัสผ่าน และ ยืนยันรหัสผ่านไม่ตรงกัน, กรุณาลองใหม่อีกครั้ง!');
+            $this->app->form_validation_lib->set_error('รหัสผ่าน และ ยืนยันรหัสผ่านไม่ตรงกัน, กรุณาลองใหม่อีกครั้ง!');
         } else {
             // run validation
-            if ($this->app->form_validation->run()) {
+            if ($this->app->form_validation_lib->run()) {
                 // check login
                 if ($this->app->auth_lib->register($register_data)) {
                     redirect('/auth_register_completed.php');

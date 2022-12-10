@@ -1,9 +1,15 @@
 <?php
 
-class Database extends Base_app
+class Database_lib extends Library
 {
     public $db = null;
     public $result = null;
+
+    public function __construct($app = null)
+    {
+        parent::__construct($app);
+        $this->connect_db();
+    }
 
     public function connect_db()
     {

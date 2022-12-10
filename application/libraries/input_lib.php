@@ -1,6 +1,6 @@
 <?php
 
-class Input extends Base_app
+class Input_lib extends Library
 {
     // get input type get
     public function get($index = null, $default = null)

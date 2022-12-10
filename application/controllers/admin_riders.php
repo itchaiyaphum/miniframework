@@ -24,14 +24,14 @@ class Admin_riders extends Controller
 
     public function publish()
     {
-        $rider_id = $this->app->input->get_post('id');
+        $rider_id = $this->app->input_lib->get_post('id');
         $this->app->admin_riders_lib->publish_rider($rider_id);
         redirect('/admin_riders.php');
     }
 
     public function delete()
     {
-        $rider_id = $this->app->input->get_post('id');
+        $rider_id = $this->app->input_lib->get_post('id');
         $this->app->admin_riders_lib->delete_rider($rider_id);
         redirect('/admin_riders.php');
     }

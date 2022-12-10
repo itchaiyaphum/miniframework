@@ -5,7 +5,7 @@ class Customer_food_review extends Controller
     public function index()
     {
         // get data form form
-        // $order_id = $this->app->input->get_post('order_id');
+        // $order_id = $this->app->input_lib->get_post('order_id');
 
         // set validation rules
 

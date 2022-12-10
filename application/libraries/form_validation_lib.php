@@ -1,6 +1,6 @@
 <?php
 
-class Form_validation extends Base_app
+class Form_validation_lib extends Library
 {
     public $check_vars = [];
     public $error_status = false;
@@ -47,7 +47,7 @@ class Form_validation extends Base_app
 
     public function _check_required($item = [])
     {
-        $var_value = $this->app->input->get_post($item['var_name']);
+        $var_value = $this->app->input_lib->get_post($item['var_name']);
         if (empty($var_value)) {
             $this->error_status = true;
             $this->error_messages .= "<li>กรุณากรอกข้อมูล {$item['var_label']}.</li>";

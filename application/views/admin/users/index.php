@@ -69,7 +69,7 @@
                 for ($i = 0; $i < $n; ++$i) {
                     $row = &$this->data['items'][$i];
 
-                    $per_page = $this->input->get_post('per_page', 1);
+                    $per_page = $this->input_lib->get_post('per_page', 1);
                     $link_edit = base_url('/admin_users.php?action=save&id='.$row['id'].'&per_page='.$per_page);
                     $link_restore = base_url('/admin_users.php?action=restore&id='.$row['id'].'&per_page='.$per_page);
                     $link_trash = base_url('/admin_users.php?action=trash&id='.$row['id'].'&per_page='.$per_page);

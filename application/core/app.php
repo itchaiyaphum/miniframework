@@ -20,10 +20,6 @@ class App
     {
         $this->_init_environment();
         $this->_init_base();
-        $this->_init_database();
-        $this->_init_input();
-        $this->_init_form_validation();
-        $this->_init_session();
         $this->_init_library();
 
         $method = (isset($_GET['action'])) ? $_GET['action'] : $method;
@@ -89,39 +85,6 @@ class App
         require_once APPPATH.DS.'core'.DS.'common.php';
     }
 
-    private function _init_database()
-    {
-        require_once 'database.php';
-        $class = ucfirst('database');
-        $obj = new $class($this);
-        $obj->connect_db();
-        $this->db = $obj;
-    }
-
-    private function _init_input()
-    {
-        require_once 'input.php';
-        $class = ucfirst('input');
-        $obj = new $class($this);
-        $this->input = $obj;
-    }
-
-    private function _init_form_validation()
-    {
-        require_once 'form_validation.php';
-        $class = ucfirst('form_validation');
-        $obj = new $class($this);
-        $this->form_validation = $obj;
-    }
-
-    private function _init_session()
-    {
-        require_once 'session.php';
-        $class = ucfirst('session');
-        $obj = new $class($this);
-        $this->session = $obj;
-    }
-
     private function _init_controller($controller_name = false, $method = 'index', $params = [])
     {
         // user controller
@@ -134,30 +97,37 @@ class App
 
     private function _init_library()
     {
+        // core library
+        $this->library('session_lib');
+        $this->library('input_lib');
+        $this->library('form_validation_lib');
+        $this->library('database_lib');
+
+        // general library
         $this->library('auth_lib');
         $this->library('users_lib');
         $this->library('profile_lib');
         $this->library('province_lib');
 
-        // admin
+        // admin library
         $this->library('admin_profile_lib');
         $this->library('admin_restaurant_types_lib');
         $this->library('admin_restaurants_lib');
         $this->library('admin_riders_lib');
         $this->library('admin_customer_lib');
 
-        // customer
+        // customer library
         $this->library('customer_profile_lib');
         $this->library('customer_restaurants_lib');
         $this->library('customer_cart_lib');
         $this->library('customer_history_order_lib');
         $this->library('customer_food_review_lib');
 
-        // rider
+        // rider library
         $this->library('rider_profile_lib');
         $this->library('rider_order_delivery_lib');
 
-        // staff
+        // staff library
         $this->library('staff_profile_lib');
         $this->library('staff_food_category_lib');
         $this->library('staff_food_menus_lib');

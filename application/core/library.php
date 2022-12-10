@@ -14,7 +14,7 @@ class Library extends Base_app
 
         $where = "id={$id}";
 
-        return $this->app->db->update($table_name, $data, $where);
+        return $this->app->database_lib->update($table_name, $data, $where);
     }
 
     public function unpublish($table_name = '', $id = 0)
@@ -29,7 +29,7 @@ class Library extends Base_app
 
         $where = "id={$id}";
 
-        return $this->app->db->update($table_name, $data, $where);
+        return $this->app->database_lib->update($table_name, $data, $where);
     }
 
     public function trash($table_name = '', $id = 0)
@@ -44,7 +44,7 @@ class Library extends Base_app
 
         $where = "id={$id}";
 
-        return $this->app->db->update($table_name, $data, $where);
+        return $this->app->database_lib->update($table_name, $data, $where);
     }
 
     public function restore($table_name = '', $id = 0)
@@ -56,14 +56,14 @@ class Library extends Base_app
 
         $where = "id={$id}";
 
-        return $this->app->db->update($table_name, $data, $where);
+        return $this->app->database_lib->update($table_name, $data, $where);
     }
 
     public function delete($table_name = '', $id = 0)
     {
         $where = "id={$id}";
 
-        return $this->app->db->delete($table_name, $where);
+        return $this->app->database_lib->delete($table_name, $where);
     }
 
     public function render_query_where($wheres = [], $options = [])
@@ -87,7 +87,7 @@ class Library extends Base_app
     {
         $filter_status = '';
         if (!isset($options['filter_status'])) {
-            $filter_status = $this->app->input->get_post('filter_status');
+            $filter_status = $this->app->input_lib->get_post('filter_status');
         } else {
             $filter_status = $options['filter_status'];
         }
@@ -135,7 +135,7 @@ class Library extends Base_app
 
     public function get_query_limit($options)
     {
-        $filter_page = $this->app->input->get_post('per_page');
+        $filter_page = $this->app->input_lib->get_post('per_page');
         if (isset($options['per_page'])) {
             $filter_page = $options['per_page'];
         }

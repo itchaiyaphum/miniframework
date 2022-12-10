@@ -1,6 +1,6 @@
 <?php
 
-class Session extends Base_app
+class Session_lib extends Library
 {
     public function __construct($app)
     {

@@ -35,8 +35,8 @@ function validation_errors()
 {
     $app = &get_instance();
 
-    if ($app->form_validation->error_status === true) {
-        echo '<div class="alert alert-danger">'.$app->form_validation->error_messages.'</div>';
+    if ($app->form_validation_lib->error_status === true) {
+        echo '<div class="alert alert-danger">'.$app->form_validation_lib->error_messages.'</div>';
     }
 }
 
@@ -44,8 +44,8 @@ function action_messages()
 {
     $app = &get_instance();
 
-    if ($app->form_validation->action_status === 'success') {
-        echo '<div class="alert alert-success">'.$app->form_validation->action_messages.'</div>';
+    if ($app->form_validation_lib->action_status === 'success') {
+        echo '<div class="alert alert-success">'.$app->form_validation_lib->action_messages.'</div>';
     }
 }
 
@@ -70,7 +70,7 @@ function set_value($field, $default = '', $html_escape = true)
 {
     $app = &get_instance();
 
-    $value = $app->input->post($field, false);
+    $value = $app->input_lib->post($field, false);
 
     isset($value) or $value = $default;
 
@@ -81,7 +81,7 @@ function set_select($field, $value = '', $default = false)
 {
     $app = &get_instance();
 
-    if (($input = $app->input->post($field, false)) === null) {
+    if (($input = $app->input_lib->post($field, false)) === null) {
         return ($default === true) ? ' selected="selected"' : '';
     }
 
@@ -104,7 +104,7 @@ function get_filter_status($filter_name = '')
 {
     $app = &get_instance();
 
-    return $app->input->post($filter_name, false);
+    return $app->input_lib->post($filter_name, false);
 }
 
 function admin_filter_status_html($name = 'filter_status')
@@ -137,7 +137,7 @@ function admin_filter_search_html($name = 'filter_search')
 function get_pagination_index($i = 0, $limit = 10)
 {
     $app = &get_instance();
-    $page = $app->input->get_post('per_page', 1);
+    $page = $app->input_lib->get_post('per_page', 1);
     if ($page == 2) {
         return $limit + $i;
     } elseif ($page >= 3) {

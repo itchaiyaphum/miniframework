@@ -24,14 +24,14 @@ class Admin_restaurants extends Controller
 
     public function publish()
     {
-        $id = $this->app->input->get_post('id');
+        $id = $this->app->input_lib->get_post('id');
         $this->app->admin_restaurants_lib->publish('restaurants', $id);
         redirect('/admin_restaurants.php');
     }
 
     public function trash()
     {
-        $id = $this->app->input->get_post('id');
+        $id = $this->app->input_lib->get_post('id');
         $this->app->admin_restaurants_lib->trash('restaurants', $id);
         redirect('/admin_restaurants.php');
     }

@@ -18,8 +18,8 @@ class Customer_cart extends Controller
 
     public function delete()
     {
-        $order_id = $this->app->input->get_post('id');
-        $item_id = $this->app->input->get_post('item_id');
+        $order_id = $this->app->input_lib->get_post('id');
+        $item_id = $this->app->input_lib->get_post('item_id');
 
         $this->app->customer_cart_lib->delete_item($order_id, $item_id);
 
@@ -28,7 +28,7 @@ class Customer_cart extends Controller
 
     public function order()
     {
-        $order_id = $this->app->input->get_post('id');
+        $order_id = $this->app->input_lib->get_post('id');
 
         $this->app->customer_cart_lib->order($order_id);
 

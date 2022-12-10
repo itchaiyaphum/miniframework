@@ -24,14 +24,14 @@ class Admin_customer extends Controller
 
     public function publish()
     {
-        $customer_id = $this->app->input->get_post('id');
+        $customer_id = $this->app->input_lib->get_post('id');
         $this->app->admin_customer_lib->publish_customer($customer_id);
         redirect('/admin_customer.php');
     }
 
     public function delete()
     {
-        $customer_id = $this->app->input->get_post('id');
+        $customer_id = $this->app->input_lib->get_post('id');
         $this->app->admin_customer_lib->delete_customer($customer_id);
         redirect('/admin_customer.php');
     }

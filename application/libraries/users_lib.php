@@ -4,7 +4,7 @@ class Users_lib extends Library
 {
     public function get_items()
     {
-        $query = $this->app->db->query('SELECT * FROM users');
+        $query = $this->app->database_lib->query('SELECT * FROM users');
 
         return $query->result();
     }
