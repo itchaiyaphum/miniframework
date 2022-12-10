@@ -56,9 +56,9 @@ class Staff_profile_lib extends Library
             'email' => $register_data['email'],
             'password' => $hash_password,
 
-            'restaurant_name' => $register_data['address'],
-            'restaurant_type_id' => $register_data['address'],
-            'restaurant_address' => $register_data['address'],
+            'restaurant_name' => $register_data['restaurant_name'],
+            'restaurant_type_id' => $register_data['restaurant_type_id'],
+            'restaurant_address' => $register_data['restaurant_address'],
             'restaurant_thumbnail' => $restaurant_thumbnail,
 
             'status' => 0,
