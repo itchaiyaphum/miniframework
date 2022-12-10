@@ -102,6 +102,7 @@ class App
         $this->library('input_lib');
         $this->library('form_validation_lib');
         $this->library('database_lib');
+        $this->library('upload_lib');
 
         // general library
         $this->library('auth_lib');
