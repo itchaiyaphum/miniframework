@@ -32,7 +32,7 @@ class Upload_lib extends Library
         $file_name = $_file['name'];
         $file_ext = $this->get_ext($file_name);
         $new_file_name = md5($file_name).'.'.$file_ext;
-        $upload_file_path = $config['upload_path'].$new_file_name;
+        $upload_file_path = PATH.$config['upload_path'].DS.$new_file_name;
 
         if (!@copy($file_temp, $upload_file_path)) {
             if (!@move_uploaded_file($file_temp, $upload_file_path)) {

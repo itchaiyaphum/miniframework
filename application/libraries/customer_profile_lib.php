@@ -24,7 +24,7 @@ class Customer_profile_lib extends Library
 
         // upload thumbnail
         $upload_config = [
-            'upload_path' => './storage/profile/',
+            'upload_path' => 'storage/profile',
         ];
         $thumbnail_data = $this->app->upload_lib->do_upload('thumbnail', $upload_config);
         if ($thumbnail_data['status']) {

@@ -64,6 +64,7 @@ class App
 
         define('DS', DIRECTORY_SEPARATOR);
         define('APPPATH', realpath('application').DS);
+        define('PATH', realpath('./').DS);
 
         if (preg_match('/dev./i', $_SERVER['SERVER_NAME'])) {
             error_reporting(-1);
