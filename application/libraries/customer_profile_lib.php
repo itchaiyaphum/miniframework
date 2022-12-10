@@ -42,6 +42,12 @@ class Customer_profile_lib extends Library
             'thumbnail' => $thumbnail,
             'email' => $register_data['email'],
             'password' => $hash_password,
+
+            'restaurant_name' => '',
+            'restaurant_type_id' => 0,
+            'restaurant_address' => '',
+            'restaurant_thumbnail' => '',
+
             'status' => 0,
             'created_at' => now(),
             'updated_at' => now(),
