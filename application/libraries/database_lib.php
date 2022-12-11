@@ -36,20 +36,20 @@ class Database_lib extends Library
 
     public function result()
     {
-        if ($this->result->num_rows > 0) {
-            return $this->result->fetch_all(MYSQLI_ASSOC);
+        if (empty($this->result) || !isset($this->result)) {
+            return [];
         }
 
-        return [];
+        return $this->result->fetch_all(MYSQLI_ASSOC);
     }
 
     public function row()
     {
-        if ($this->result->num_rows > 0) {
-            return $this->result->fetch_array(MYSQLI_ASSOC);
+        if (empty($this->result) || !isset($this->result)) {
+            return [];
         }
 
-        return [];
+        return $this->result->fetch_array(MYSQLI_ASSOC);
     }
 
     // insert data
@@ -71,6 +71,9 @@ class Database_lib extends Library
 
         // insert data to database
         $sql = "INSERT INTO `{$table_name}` ({$data_keys_sql}) VALUES ({$data_values_sql})";
+
+        // print_r($sql);
+        // exit;
 
         return $this->db->query($sql);
     }
@@ -95,6 +98,9 @@ class Database_lib extends Library
             return true;
         }
 
+        // print_r($sql);
+        // exit;
+
         return false;
     }
 
@@ -109,6 +115,9 @@ class Database_lib extends Library
         if ($this->db->query($sql) === true) {
             return true;
         }
+
+        // print_r($sql);
+        // exit;
 
         return false;
     }

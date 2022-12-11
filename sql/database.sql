@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 11, 2022 at 07:08 AM
+-- Generation Time: Dec 11, 2022 at 09:33 AM
 -- Server version: 5.6.38
 -- PHP Version: 7.2.1
 
@@ -48,8 +48,10 @@ CREATE TABLE `food_categories` (
 --
 
 INSERT INTO `food_categories` (`id`, `restaurant_id`, `title`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 'ประเภทต้ม', 1, '2022-11-28 00:00:00', '2022-11-28 19:50:30'),
-(2, 1, 'ประเภทผัด', 1, '2022-11-28 00:00:00', '2022-11-28 19:50:55');
+(1, 2, 'ประเภทต้ม', 1, '2022-11-28 00:00:00', '2022-12-11 15:19:43'),
+(2, 2, 'ประเภทผัด', 1, '2022-11-28 00:00:00', '2022-12-11 15:27:21'),
+(4, 2, 'ประเภททอด', 1, '2022-12-11 15:30:08', '2022-12-11 15:30:08'),
+(5, 0, 'ประเภทเผา', 1, '2022-12-11 16:32:52', '2022-12-11 16:32:52');
 
 -- --------------------------------------------------------
 
@@ -63,6 +65,8 @@ CREATE TABLE `food_menus` (
   `food_category_id` int(11) NOT NULL DEFAULT '0',
   `title` varchar(255) NOT NULL,
   `price` int(11) NOT NULL DEFAULT '0',
+  `discount_percent` tinyint(2) NOT NULL DEFAULT '0',
+  `thumbnail` varchar(255) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
@@ -72,9 +76,10 @@ CREATE TABLE `food_menus` (
 -- Dumping data for table `food_menus`
 --
 
-INSERT INTO `food_menus` (`id`, `restaurant_id`, `food_category_id`, `title`, `price`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 'ต้มยำปลากระบอก (หม้อไฟ)', 200, 1, '2022-11-28 00:00:00', '2022-11-28 00:00:00'),
-(2, 1, 1, 'ต้มยำปลากระบอก (ถ้วย)', 100, 1, '2022-11-28 00:00:00', '2022-11-28 00:00:00');
+INSERT INTO `food_menus` (`id`, `restaurant_id`, `food_category_id`, `title`, `price`, `discount_percent`, `thumbnail`, `status`, `created_at`, `updated_at`) VALUES
+(1, 2, 1, 'ต้มยำปลากระบอก (หม้อไฟ)', 100, 10, '/storage/food/91d2cd2b1e21143db7580cc3b956fffb.png', 1, '2022-11-28 00:00:00', '2022-12-11 16:30:52'),
+(2, 2, 4, 'ปลากระพงทอดน้ำปลา', 300, 0, '/storage/food/ebbb2f0e5d0f2c548962073afd26b2d9.png', 1, '2022-11-28 00:00:00', '2022-12-11 16:31:22'),
+(4, 2, 5, 'กุ้งเผา', 500, 10, '/storage/food/d13ccbfb9d1edc2803c569a0667f5883.png', 1, '2022-12-11 16:31:45', '2022-12-11 16:32:58');
 
 -- --------------------------------------------------------
 
@@ -134,8 +139,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `password`, `email`, `firstname`, `lastname`, `user_type`, `thumbnail`, `address`, `restaurant_name`, `restaurant_type_id`, `restaurant_address`, `restaurant_thumbnail`, `mobile_no`, `status`, `created_at`, `updated_at`) VALUES
 (1, '969d4e0dac684705b014dd00b501e63c', 'admin@demo.com', 'admin', 'demo', 'admin', '/storage/profile/ecf308c276207a3a93d8550b5b833c71.png', '240 Nai Mueang, Mueang, Chaiyaphum', '', 0, '', '', '096-520-7008', 1, '2022-11-21 04:02:24', '2022-12-11 11:57:29'),
 (2, '969d4e0dac684705b014dd00b501e63c', 'staff@demo.com', 'staff', 'demo', 'staff', '/storage/profile/4cd333703b7266c1ff58fb20b216bb2c.png', '18/116 ซอยสุขสวัสดิ์ 30 แยก 8-2', 'ร้านไก่ย่าง 1', 1, '18/116 ซอยสุขสวัสดิ์ 30 แยก 8-2', '/storage/restaurant/6f8225107bc367e850760bfbc5a689fb.png', '0965207008', 1, '2022-11-21 04:02:24', '2022-12-11 12:49:17'),
-(3, '969d4e0dac684705b014dd00b501e63c', 'rider@demo.com', 'rider', 'demo', 'rider', '/storage/profile/e8c3fac855dc95fd78a08363cf459a5f.png', '18/116 ซอยสุขสวัสดิ์ 30 แยก 8-2', '', 0, '', '', '0965207008', 1, '2022-11-21 04:02:24', '2022-12-11 11:50:12'),
-(4, '969d4e0dac684705b014dd00b501e63c', 'customer@demo.com', 'customer', 'demo', 'customer', '/storage/profile/2dd345c57ed613648079d161721700fd.png', '18/116 ซอยสุขสวัสดิ์ 30 แยก 8-2', '', 0, '', '', '0965207008', 1, '2022-11-21 04:02:24', '2022-12-11 11:57:50');
+(3, '969d4e0dac684705b014dd00b501e63c', 'rider@demo.com', 'rider', 'demo', 'rider', '/storage/profile/e8c3fac855dc95fd78a08363cf459a5f.png', '18/116 ซอยสุขสวัสดิ์ 30 แยก 8-2', '', 0, '', '', '0965207008', 1, '2022-11-21 04:02:24', '2022-12-11 15:06:50'),
+(4, '969d4e0dac684705b014dd00b501e63c', 'customer@demo.com', 'customer', 'demo', 'customer', '/storage/profile/2dd345c57ed613648079d161721700fd.png', '18/116 ซอยสุขสวัสดิ์ 30 แยก 8-2', '', 0, '', '', '0965207008', 1, '2022-11-21 04:02:24', '2022-12-11 15:01:56');
 
 --
 -- Indexes for dumped tables
@@ -185,13 +190,13 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `food_categories`
 --
 ALTER TABLE `food_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `food_menus`
 --
 ALTER TABLE `food_menus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `restaurant_types`
