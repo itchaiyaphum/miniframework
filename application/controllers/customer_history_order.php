@@ -6,7 +6,8 @@ class Customer_history_order extends Controller
     {
         $data = [];
         $data['title'] = 'ประวัติการสั่งซื้ออาหาร - ระบบสั่งอาหารออนไลน์';
-        $data['items'] = $this->app->customer_cart_lib->get_items();
+        $data['order_items'] = $this->app->customer_history_order_lib->get_order_items();
+        $data['food_items'] = $this->app->customer_history_order_lib->get_food_items();
         $data['active_menu'] = 'history_order';
         $data['left_menu'] = $this->app->view('customer/menu', $data, true);
 
