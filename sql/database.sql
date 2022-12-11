@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 11, 2022 at 11:24 AM
+-- Generation Time: Dec 11, 2022 at 06:10 PM
 -- Server version: 5.6.38
 -- PHP Version: 7.2.1
 
@@ -27,22 +27,6 @@ CREATE TABLE `cart` (
   `food_id` int(11) NOT NULL,
   `food_amount` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`id`, `user_id`, `restaurant_id`, `food_id`, `food_amount`) VALUES
-(1, 4, 2, 1, 1),
-(2, 4, 2, 2, 1),
-(3, 4, 2, 4, 1),
-(4, 4, 2, 1, 1),
-(5, 4, 2, 1, 1),
-(6, 4, 2, 1, 1),
-(7, 4, 2, 2, 1),
-(8, 4, 2, 4, 1),
-(9, 4, 2, 1, 1),
-(10, 4, 2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -96,6 +80,73 @@ INSERT INTO `food_menus` (`id`, `restaurant_id`, `food_category_id`, `title`, `p
 (1, 2, 1, 'ต้มยำปลากระบอก (หม้อไฟ)', 100, 10, '/storage/food/91d2cd2b1e21143db7580cc3b956fffb.png', 1, '2022-11-28 00:00:00', '2022-12-11 16:30:52'),
 (2, 2, 4, 'ปลากระพงทอดน้ำปลา', 300, 0, '/storage/food/ebbb2f0e5d0f2c548962073afd26b2d9.png', 1, '2022-11-28 00:00:00', '2022-12-11 16:31:22'),
 (4, 2, 5, 'กุ้งเผา', 500, 10, '/storage/food/d13ccbfb9d1edc2803c569a0667f5883.png', 1, '2022-12-11 16:31:45', '2022-12-11 16:32:58');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL DEFAULT '0',
+  `restaurant_id` int(11) NOT NULL DEFAULT '0',
+  `total_price` double NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `status` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `customer_id`, `restaurant_id`, `total_price`, `created_at`, `updated_at`, `status`) VALUES
+(4, 4, 2, 2040, '2022-12-12 00:34:20', '2022-12-12 00:34:20', 0),
+(5, 4, 2, 90, '2022-12-12 00:59:36', '2022-12-12 00:59:36', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders_items`
+--
+
+CREATE TABLE `orders_items` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL DEFAULT '0',
+  `food_id` int(11) NOT NULL DEFAULT '0',
+  `food_price` double NOT NULL DEFAULT '0',
+  `food_discount_price` double NOT NULL DEFAULT '0',
+  `food_amount` double NOT NULL,
+  `food_total` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `orders_items`
+--
+
+INSERT INTO `orders_items` (`id`, `order_id`, `food_id`, `food_price`, `food_discount_price`, `food_amount`, `food_total`) VALUES
+(3, 3, 1, 100, 90, 1, 90),
+(4, 3, 1, 100, 90, 1, 90),
+(5, 3, 1, 100, 90, 1, 90),
+(6, 3, 1, 100, 90, 1, 90),
+(7, 3, 1, 100, 90, 1, 90),
+(8, 3, 1, 100, 90, 1, 90),
+(9, 3, 2, 300, 300, 1, 300),
+(10, 3, 2, 300, 300, 1, 300),
+(11, 3, 4, 500, 450, 1, 450),
+(12, 3, 4, 500, 450, 1, 450),
+(13, 4, 1, 100, 90, 1, 90),
+(14, 4, 1, 100, 90, 1, 90),
+(15, 4, 1, 100, 90, 1, 90),
+(16, 4, 1, 100, 90, 1, 90),
+(17, 4, 1, 100, 90, 1, 90),
+(18, 4, 1, 100, 90, 1, 90),
+(19, 4, 2, 300, 300, 1, 300),
+(20, 4, 2, 300, 300, 1, 300),
+(21, 4, 4, 500, 450, 1, 450),
+(22, 4, 4, 500, 450, 1, 450),
+(23, 5, 1, 100, 90, 1, 90);
 
 -- --------------------------------------------------------
 
@@ -205,6 +256,18 @@ ALTER TABLE `food_menus`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `orders_items`
+--
+ALTER TABLE `orders_items`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `restaurant_types`
 --
 ALTER TABLE `restaurant_types`
@@ -230,7 +293,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `food_categories`
@@ -243,6 +306,18 @@ ALTER TABLE `food_categories`
 --
 ALTER TABLE `food_menus`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `orders_items`
+--
+ALTER TABLE `orders_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `restaurant_types`
