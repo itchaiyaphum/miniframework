@@ -30,28 +30,18 @@
                     <div class="card mb-5">
                         <div class="card-body">
                             <?php echo validation_errors(); ?>
-                            <form id="editForm" class="needs-validation" method="post" novalidate>
                                 <!-- field: title -->
                                 <div class="row mb-4">
                                     <label for="titleLabel" class="col-sm-3 col-form-label form-label">ประเภทร้านอาหาร *
                                     </label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" name="title" id="titleLabel"
-                                            value="<?php echo $this->data['item']['title']; ?>" required />
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <label for="thumbnailLabel" class="col-sm-3 col-form-label form-label">รูปภาพประกอบ
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <input type="file" class="form-control" name="thumbnail" id="thumbnailLabel" />
-                                        <img src="/assets/img/admin_index.png" class="w-50 mt-2">
+                                            value="<?php echo array_value($this->data['item'], 'title'); ?>" required />
                                     </div>
                                 </div>
                                 <!-- End field: title -->
 
-                                <input type="hidden" name="id" value="<?php echo $this->data['item']['id']; ?>" />
-                            </form>
+                                <input type="hidden" name="id" value="<?php echo array_value($this->data['item'], 'id', 0); ?>" />
                         </div>
                     </div>
                 </form>

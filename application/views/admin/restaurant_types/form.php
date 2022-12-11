@@ -32,7 +32,7 @@
                                     </label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" name="title" id="titleLabel"
-                                            value="<?php echo array_value($this->data['item']['title']); ?>" required />
+                                            value="<?php echo array_value($this->data['item'], 'title'); ?>" required />
                                     </div>
                                 </div>
                                 <div class="row mb-4">
@@ -40,14 +40,14 @@
                                     </label>
                                     <div class="col-sm-9">
                                         <input type="file" class="form-control" name="thumbnail" />
-                                        <img src="<?php echo array_value($this->data['item']['thumbnail']); ?>"
+                                        <img src="<?php echo array_value($this->data['item'], 'thumbnail'); ?>"
                                             class="w-50 mt-2">
                                     </div>
                                 </div>
                                 <!-- End field: title -->
 
                                 <input type="hidden" name="id"
-                                    value="<?php echo array_value($this->data['item']['id'], 0); ?>" />
+                                    value="<?php echo array_value($this->data['item'], 'id', 0); ?>" />
                             </div>
                         </div>
                     </form>

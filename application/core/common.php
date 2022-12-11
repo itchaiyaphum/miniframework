@@ -16,9 +16,9 @@ function base_url($url = '')
     return $base_url.$url;
 }
 
-function array_value($array_data = null, $default = '')
+function array_value($array_data = null, $key = '', $default = '')
 {
-    return (isset($array_data)) ? $array_data : $default;
+    return (!empty($array_data) && isset($array_data[$key])) ? $array_data[$key] : $default;
 }
 
 function active_menu($data = null, $index = null)
