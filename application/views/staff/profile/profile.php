@@ -1,6 +1,4 @@
-<div class="container mt-3">
-    <?php echo validation_errors(); ?>
-    <?php echo action_messages(); ?>
+<div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8 col-lg-6">
             <div class="card mb-5">
@@ -8,13 +6,15 @@
                     <h2 class="card-title h4">แก้ไขข้อมูลส่วนตัว</h2>
                 </div>
                 <div class="card-body">
-                    <form id="mainForm" method="post" >
+                    <?php echo validation_errors(); ?>
+                    <?php echo action_messages(); ?>
+                    <form id="mainForm" method="post" enctype="multipart/form-data">
                         <!-- field: firstname -->
                         <div class="row mb-4">
                             <label for="firstnameLabel" class="col-sm-3 col-form-label form-label">ชื่อ *</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="firstname" id="firstnameLabel" value=""
-                                    required />
+                                <input type="text" class="form-control" name="firstname" id="firstnameLabel"
+                                    value="<?php echo $this->data['profile']->firstname; ?>" required />
                             </div>
                         </div>
                         <!-- End field: firstname -->
@@ -23,8 +23,8 @@
                         <div class="row mb-4">
                             <label for="lastnameLabel" class="col-sm-3 col-form-label form-label">นามสกุล *</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="lastname" id="lastnameLabel" value=""
-                                    required />
+                                <input type="text" class="form-control" name="lastname" id="lastnameLabel"
+                                    value="<?php echo $this->data['profile']->lastname; ?>" required />
                             </div>
                         </div>
                         <!-- End field: lastname -->
@@ -36,7 +36,7 @@
 
                             <div class="col-sm-9">
                                 <input type="text" class="js-input-mask form-control" name="mobile_no" id="phoneLabel"
-                                    value="" required />
+                                    value="<?php echo $this->data['profile']->mobile_no; ?>" required />
                             </div>
                         </div>
                         <!-- end field: mobile_no -->
@@ -47,18 +47,19 @@
                                 *</label>
 
                             <div class="col-sm-9">
-                                <textarea row="4" class="form-control" name="address" id="addressLine1Label"></textarea>
+                                <textarea row="4" class="form-control" name="address" id="addressLine1Label"
+                                    required><?php echo $this->data['profile']->address; ?></textarea>
                             </div>
                         </div>
                         <!-- end field: address -->
 
                         <!-- field: thumbnail -->
                         <div class="row mb-4">
-                            <label for="thumbnailLabel"
-                                class="col-sm-3 col-form-label form-label">รูปภาพประจำตัว</label>
+                            <label for="thumbnailLabel" class="col-sm-3 col-form-label form-label">รูปภาพประจำตัว
+                                </label>
                             <div class="col-sm-9">
-                                <img src="/assets/img/admin_index.png" class="mb-3 w-25">
-                                <input type="file" class="form-control" name="thumbnail" value="" required />
+                                <img src="<?php echo $this->data['profile']->thumbnail; ?>" class="mb-3 w-25 border">
+                                <input type="file" class="form-control" name="thumbnail" />
                             </div>
                         </div>
                         <!-- end field: thumbnail -->
@@ -68,8 +69,8 @@
                             <label for="emailLabel" class="col-sm-3 col-form-label form-label">อีเมล์ *</label>
 
                             <div class="col-sm-9">
-                                <input type="email" class="form-control" name="email" id="emailLabel" value=""
-                                    required />
+                                <input type="email" class="form-control" name="email" id="emailLabel"
+                                    value="<?php echo $this->data['profile']->email; ?>" required />
                             </div>
                         </div>
                         <!-- end field: email -->
@@ -79,13 +80,10 @@
                             <label for="passwordLabel" class="col-sm-3 col-form-label form-label">รหัสผ่าน</label>
 
                             <div class="col-sm-9">
-                                <input type="password" class="form-control" name="password" id="passwordLabel"
-                                    value="" />
+                                <input type="password" class="form-control" name="password" id="passwordLabel"/>
                             </div>
                         </div>
                         <!-- end field: password -->
-
-
 
                         <div class="text-bg-secondary mt-5 mb-5">
                             <h4 class="p-2">ข้อมูลร้านอาหาร</h4>
@@ -95,7 +93,7 @@
                             <label for="restaurantNameLabel" class="col-sm-3 col-form-label form-label">ชื่อร้านอาหาร *</label>
 
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="restaurant_name" id="restaurantNameLabel" value=""
+                                <input type="text" class="form-control" name="restaurant_name" id="restaurantNameLabel" value="<?php echo $this->data['profile']->restaurant_name; ?>"
                                     required />
                             </div>
                         </div>
@@ -103,16 +101,18 @@
 
                         <!-- field: restaurant type -->
                         <div class="row mb-4">
-                            <label for="restaurantTypeLabel" class="col-sm-3 col-form-label form-label">ประเภทร้านอาหาร *</label>
+                            <label for="restaurantTypeIdLabel" class="col-sm-3 col-form-label form-label">ประเภทร้านอาหาร *</label>
 
                             <div class="col-sm-9">
-                                <select class="form-select" name="restaurant_type" id="restaurantTypeLabel" required>
-                                    <option>-- กรุณาเลือกประเภทร้านอาหาร --</option>
-                                    <option value="1">อาหารอีสาน</option>
-                                    <option value="2">อาหารอินเดีย</option>
-                                    <option value="3">อาหารเวียดนาม</option>
-                                    <option value="4">อาหารไทย</option>
-                                    <option value="5">อาหารนานาชาติ</option>
+                                <select class="form-select" name="restaurant_type_id" id="restaurantTypeIdLabel" required>
+                                    <option value="0">-- กรุณาเลือกประเภทร้านอาหาร --</option>
+                                    <?php
+                                    for ($i = 0; $i < count($this->data['restaurant_types']); ++$i) {
+                                        $row = $this->data['restaurant_types'][$i];
+                                        ?>
+                                    <option value="<?php echo $row['id']; ?>" <?php echo ($row['id'] == $this->data['profile']->restaurant_type_id) ? 'selected' : ''; ?>><?php echo $row['title']; ?></option>
+                                    <?php
+                                    }?>
                                 </select>
                             </div>
                         </div>
@@ -124,7 +124,7 @@
                                 *</label>
 
                             <div class="col-sm-9">
-                                <textarea row="4" class="form-control" name="restaurant_address" id="restaurantAddressLabel" required></textarea>
+                                <textarea row="4" class="form-control" name="restaurant_address" id="restaurantAddressLabel" required><?php echo $this->data['profile']->restaurant_address; ?></textarea>
                             </div>
                         </div>
                         <!-- end field: restaurantaddress -->
@@ -134,15 +134,14 @@
                             <label for="restaurantThumbnailLabel"
                                 class="col-sm-3 col-form-label form-label">รูปภาพร้านอาหาร</label>
                             <div class="col-sm-9">
-                                <img src="/assets/img/admin_index.png" class="mb-3 w-25">
-                                <input type="file" class="form-control" name="restaurant_thumbnail" value="" required />
+                                <img src="<?php echo $this->data['profile']->restaurant_thumbnail; ?>" class="mb-3 w-25">
+                                <input type="file" class="form-control" name="restaurant_thumbnail" />
                             </div>
                         </div>
                         <!-- end field: restaurant thumbnail -->
 
-
                         <!-- submit button -->
-                        <div class="row mt-5 mb-4">
+                        <div class="row mb-4">
                             <label for="levelLabel" class="col-sm-3 col-form-label form-label">.</label>
                             <div class="col-sm-9">
                                 <button type="submit" class="btn btn-primary btn-lg">
@@ -150,7 +149,12 @@
                                 </button>
                             </div>
                         </div>
+
                     </form>
+                    <hr />
+                    <div class="text-center">
+                        <a href="/" class="link-secondary">กลับหน้าหลัก</a>
+                    </div>
                 </div><!-- end: card-body -->
             </div><!-- end: card -->
         </div>
