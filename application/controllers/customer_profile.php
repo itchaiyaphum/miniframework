@@ -29,7 +29,7 @@ class Customer_profile extends Controller
         }
 
         $data = [];
-        $data['title'] = 'ลงทะเบียนสำหรับลูกค้า - ระบบสั่งอาหารออนไลน์';
+        $data['title'] = 'แก้ไขข้อมูลส่วนตัว - ระบบสั่งอาหารออนไลน์';
         $data['profile'] = $this->app->profile_lib->get_profile();
 
         $data['firstname'] = $firstname;
