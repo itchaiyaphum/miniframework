@@ -22,17 +22,17 @@ class Admin_customer extends Controller
         $this->app->view('footer');
     }
 
-    public function publish()
+    public function approve()
     {
-        $customer_id = $this->app->input_lib->get_post('id');
-        $this->app->admin_customer_lib->publish_customer($customer_id);
+        $id = $this->app->input_lib->get_post('id');
+        $this->app->admin_customer_lib->publish('users', $id);
         redirect('/admin_customer.php');
     }
 
-    public function delete()
+    public function cancel()
     {
-        $customer_id = $this->app->input_lib->get_post('id');
-        $this->app->admin_customer_lib->delete_customer($customer_id);
+        $id = $this->app->input_lib->get_post('id');
+        $this->app->admin_customer_lib->unpublish('users', $id);
         redirect('/admin_customer.php');
     }
 }
