@@ -7,7 +7,7 @@ class Customer_restaurants extends Controller
         $data = [];
         $data['title'] = 'แสดงร้านอาหารทั้งหมด - ระบบสั่งอาหารออนไลน์';
         $data['active_menu'] = 'restaurants';
-        $data['restaurants'] = $this->app->customer_restaurants_lib->get_items();
+        $data['items'] = $this->app->customer_restaurants_lib->get_items(['no_limit' => true]);
         $data['left_menu'] = $this->app->view('customer/menu', $data, true);
 
         $this->app->view('header', $data);
@@ -18,14 +18,16 @@ class Customer_restaurants extends Controller
 
     public function detail()
     {
-        $cate_id = $this->app->input_lib->get_post('cate_id', 1);
+        $id = $this->app->input_lib->get_post('id', 0);
+        $cate_id = $this->app->input_lib->get_post('cate_id', 0);
+
         $data = [];
         $data['title'] = 'รายละเอียดร้านอาหาร - ระบบสั่งอาหารออนไลน์';
         $data['active_menu'] = 'restaurants';
         $data['cate_id'] = $cate_id;
-        $data['restaurant'] = $this->app->customer_restaurants_lib->get_item();
+        $data['item'] = $this->app->customer_restaurants_lib->get_item($id);
         $data['food_categories'] = $this->app->customer_restaurants_lib->get_food_categories();
-        $data['food_menus'] = $this->app->customer_restaurants_lib->get_food_menus();
+        $data['food_menus'] = $this->app->customer_restaurants_lib->get_food_menus($id, $cate_id);
         $data['reviews'] = $this->app->customer_restaurants_lib->get_reviews();
         $data['left_menu'] = $this->app->view('customer/menu', $data, true);
 
@@ -37,6 +39,12 @@ class Customer_restaurants extends Controller
 
     public function add_to_cart()
     {
-        redirect('/customer_restaurants.php?action=detail');
+        $id = $this->app->input_lib->get_post('id', 0);
+        $cate_id = $this->app->input_lib->get_post('cate_id', 0);
+        $food_id = $this->app->input_lib->get_post('food_id', 0);
+
+        $this->app->customer_cart_lib->add_to_cart($id, $food_id);
+
+        redirect("/customer_restaurants.php?action=detail&id={$id}&cate_id={$cate_id}&msg_status=addtocart_ok");
     }
 }
