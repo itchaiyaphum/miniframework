@@ -9,7 +9,7 @@
             <div class="col-lg-9">
                 <div class="page-header mt-3">
                     <div class="d-flex justify-content-between">
-                        <h1>จัดการผู้ส่งอาหาร (Riders)</h1>
+                        <h1>จัดการผู้ส่งอาหาร (Rider)</h1>
                     </div>
                 </div>
                 <form id="adminForm" method="post">
@@ -22,117 +22,60 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <h2>รออนุมัติ (5 คน)</h2>
+                            <h2>รออนุมัติ</h2>
                             <div class="row">
+                                <?php
+                                for ($i = 0; $i < count($this->data['items']); ++$i) {
+                                    $item = $this->data['items'][$i];
+                                    $approve_link = "/admin_riders.php?action=approve&id={$item['id']}";
+
+                                    if ($item['status'] == 0) {
+                                        ?>
                                 <div class="col-4">
                                     <div class="card mb-4">
-                                        <img src="/assets/img/admin_index.png" width="100%" class="card-img-top">
+                                        <img src="<?php echo $item['thumbnail']; ?>" width="100%"
+                                            class="card-img-top">
                                         <div class="card-body text-center">
-                                            <h5 class="card-title">AODTO WK</h5>
-                                            <p class="card-text">aodto.wk@gmail.com</p>
-                                            <a href="#" class="btn btn-primary">อนุมัติ</a>
+                                            <h5 class="card-title"><?php echo $item['firstname'].' '.$item['lastname']; ?></h5>
+                                            <h6 class="card-title">(<?php echo $item['email']; ?>)</h6>
+                                            <a href="<?php echo $approve_link; ?>" class="btn btn-primary">อนุมัติ</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-4">
-                                    <div class="card mb-4">
-                                        <img src="/assets/img/admin_index.png" width="100%" class="card-img-top">
-                                        <div class="card-body text-center">
-                                            <h5 class="card-title">AODTO WK</h5>
-                                            <p class="card-text">aodto.wk@gmail.com</p>
-                                            <a href="#" class="btn btn-primary">อนุมัติ</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="card mb-4">
-                                        <img src="/assets/img/admin_index.png" width="100%" class="card-img-top">
-                                        <div class="card-body text-center">
-                                            <h5 class="card-title">AODTO WK</h5>
-                                            <p class="card-text">aodto.wk@gmail.com</p>
-                                            <a href="#" class="btn btn-primary">อนุมัติ</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="card mb-4">
-                                        <img src="/assets/img/admin_index.png" width="100%" class="card-img-top">
-                                        <div class="card-body text-center">
-                                            <h5 class="card-title">AODTO WK</h5>
-                                            <p class="card-text">aodto.wk@gmail.com</p>
-                                            <a href="#" class="btn btn-primary">อนุมัติ</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="card mb-4">
-                                        <img src="/assets/img/admin_index.png" width="100%" class="card-img-top">
-                                        <div class="card-body text-center">
-                                            <h5 class="card-title">AODTO WK</h5>
-                                            <p class="card-text">aodto.wk@gmail.com</p>
-                                            <a href="#" class="btn btn-primary">อนุมัติ</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php
+                                    }
+                                }
+            ?>
                             </div>
 
                             <br /><br />
-                            <h2>อนุมัติแล้ว (5 คน)</h2>
+                            <h2>อนุมัติแล้ว</h2>
                             <div class="row">
+                            <?php
+                            for ($i = 0; $i < count($this->data['items']); ++$i) {
+                                $item = $this->data['items'][$i];
+                                $cancel_link = "/admin_riders.php?action=cancel&id={$item['id']}";
+
+                                if ($item['status'] == 1) {
+                                    ?>
                                 <div class="col-4">
                                     <div class="card mb-4">
-                                        <img src="/assets/img/admin_index.png" width="100%" class="card-img-top">
+                                        <img src="<?php echo $item['thumbnail']; ?>" width="100%"
+                                            class="card-img-top">
                                         <div class="card-body text-center">
-                                            <h5 class="card-title">AODTO WK</h5>
-                                            <p class="card-text">aodto.wk@gmail.com</p>
-                                            <a href="#" class="btn btn-danger">ยกเลิก</a>
+                                            <h5 class="card-title"><?php echo $item['firstname'].' '.$item['lastname']; ?></h5>
+                                            <h6 class="card-title">(<?php echo $item['email']; ?>)</h6>
+                                            <a href="<?php echo $cancel_link; ?>" class="btn btn-danger">ระงับการใช้งาน</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-4">
-                                    <div class="card mb-4">
-                                        <img src="/assets/img/admin_index.png" width="100%" class="card-img-top">
-                                        <div class="card-body text-center">
-                                            <h5 class="card-title">AODTO WK</h5>
-                                            <p class="card-text">aodto.wk@gmail.com</p>
-                                            <a href="#" class="btn btn-danger">ยกเลิก</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="card mb-4">
-                                        <img src="/assets/img/admin_index.png" width="100%" class="card-img-top">
-                                        <div class="card-body text-center">
-                                            <h5 class="card-title">AODTO WK</h5>
-                                            <p class="card-text">aodto.wk@gmail.com</p>
-                                            <a href="#" class="btn btn-danger">ยกเลิก</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="card mb-4">
-                                        <img src="/assets/img/admin_index.png" width="100%" class="card-img-top">
-                                        <div class="card-body text-center">
-                                            <h5 class="card-title">AODTO WK</h5>
-                                            <p class="card-text">aodto.wk@gmail.com</p>
-                                            <a href="#" class="btn btn-danger">ยกเลิก</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="card mb-4">
-                                        <img src="/assets/img/admin_index.png" width="100%" class="card-img-top">
-                                        <div class="card-body text-center">
-                                            <h5 class="card-title">AODTO WK</h5>
-                                            <p class="card-text">aodto.wk@gmail.com</p>
-                                            <a href="#" class="btn btn-danger">ยกเลิก</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php
+                                }
+                            }
+            ?>
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" name="filter_status" value="all" />
                 </form>
             </div>
             <!-- end: main content -->

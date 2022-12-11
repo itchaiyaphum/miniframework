@@ -11,9 +11,9 @@ class Admin_riders extends Controller
     public function index()
     {
         $data = [];
-        $data['title'] = 'จัดการสมาชิกทั้งหมด - ระบบสั่งอาหารออนไลน์';
+        $data['title'] = 'จัดการผู้ส่งอาหาร - ระบบสั่งอาหารออนไลน์';
         $data['active_menu'] = 'riders';
-        $data['items'] = $this->app->admin_riders_lib->get_items(['limit' => 10]);
+        $data['items'] = $this->app->admin_riders_lib->get_items();
         $data['left_menu'] = $this->app->view('admin/menu', $data, true);
 
         $this->app->view('header', $data);
@@ -22,17 +22,17 @@ class Admin_riders extends Controller
         $this->app->view('footer');
     }
 
-    public function publish()
+    public function approve()
     {
-        $rider_id = $this->app->input_lib->get_post('id');
-        $this->app->admin_riders_lib->publish_rider($rider_id);
+        $id = $this->app->input_lib->get_post('id');
+        $this->app->admin_riders_lib->publish('users', $id);
         redirect('/admin_riders.php');
     }
 
-    public function delete()
+    public function cancel()
     {
-        $rider_id = $this->app->input_lib->get_post('id');
-        $this->app->admin_riders_lib->delete_rider($rider_id);
+        $id = $this->app->input_lib->get_post('id');
+        $this->app->admin_riders_lib->unpublish('users', $id);
         redirect('/admin_riders.php');
     }
 }
