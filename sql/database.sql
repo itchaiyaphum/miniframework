@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 28, 2022 at 09:20 AM
+-- Generation Time: Dec 11, 2022 at 07:08 AM
 -- Server version: 5.6.38
 -- PHP Version: 7.2.1
 
@@ -17,47 +17,64 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `provinces`
+-- Table structure for table `cart`
 --
 
-CREATE TABLE `provinces` (
+CREATE TABLE `cart` (
   `id` int(11) NOT NULL,
-  `province_name` varchar(20) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1'
+  `user_id` int(11) NOT NULL,
+  `restaurant_id` int(11) NOT NULL,
+  `food_id` int(11) NOT NULL,
+  `food_amount` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `provinces`
---
-
-INSERT INTO `provinces` (`id`, `province_name`, `status`) VALUES
-(1, 'ชัยภูมิ', 1),
-(2, 'กรุงเทพมหานคร', 1),
-(3, 'เชียงใหม่', 1),
-(4, 'เชียงราย', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `restaurants`
+-- Table structure for table `food_categories`
 --
 
-CREATE TABLE `restaurants` (
+CREATE TABLE `food_categories` (
   `id` int(11) NOT NULL,
-  `restaurant_type_id` int(11) NOT NULL DEFAULT '0',
+  `restaurant_id` int(11) NOT NULL DEFAULT '0',
   `title` varchar(255) NOT NULL,
-  `staff_id` int(11) NOT NULL DEFAULT '0',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `restaurants`
+-- Dumping data for table `food_categories`
 --
 
-INSERT INTO `restaurants` (`id`, `restaurant_type_id`, `title`, `staff_id`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 'ส้มตำเจ้น้ำ', 2, 1, '2022-11-28 00:00:00', '2022-11-28 16:16:33');
+INSERT INTO `food_categories` (`id`, `restaurant_id`, `title`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 'ประเภทต้ม', 1, '2022-11-28 00:00:00', '2022-11-28 19:50:30'),
+(2, 1, 'ประเภทผัด', 1, '2022-11-28 00:00:00', '2022-11-28 19:50:55');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `food_menus`
+--
+
+CREATE TABLE `food_menus` (
+  `id` int(11) NOT NULL,
+  `restaurant_id` int(11) NOT NULL DEFAULT '0',
+  `food_category_id` int(11) NOT NULL DEFAULT '0',
+  `title` varchar(255) NOT NULL,
+  `price` int(11) NOT NULL DEFAULT '0',
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `food_menus`
+--
+
+INSERT INTO `food_menus` (`id`, `restaurant_id`, `food_category_id`, `title`, `price`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 'ต้มยำปลากระบอก (หม้อไฟ)', 200, 1, '2022-11-28 00:00:00', '2022-11-28 00:00:00'),
+(2, 1, 1, 'ต้มยำปลากระบอก (ถ้วย)', 100, 1, '2022-11-28 00:00:00', '2022-11-28 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -68,6 +85,7 @@ INSERT INTO `restaurants` (`id`, `restaurant_type_id`, `title`, `staff_id`, `sta
 CREATE TABLE `restaurant_types` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
+  `thumbnail` varchar(255) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
@@ -77,24 +95,12 @@ CREATE TABLE `restaurant_types` (
 -- Dumping data for table `restaurant_types`
 --
 
-INSERT INTO `restaurant_types` (`id`, `title`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'อาหารอีสาน', 1, '2022-11-28 16:04:15', '2022-11-28 16:16:22'),
-(2, 'อาหารอินเดีย', 0, '2022-11-28 00:00:00', '2022-11-28 16:05:32'),
-(3, 'อาหารใต้', 1, '2022-11-28 00:00:00', '0000-00-00 00:00:00'),
-(4, 'อาหารไทย', 0, '2022-11-28 00:00:00', '0000-00-00 00:00:00'),
-(5, 'อาหารเหนือ', 1, '2022-11-28 00:00:00', '0000-00-00 00:00:00'),
-(7, 'อาหารนานาชาติ', 1, '2022-11-28 00:00:00', '0000-00-00 00:00:00'),
-(8, 'อาหารสุขภาพ', 0, '2022-11-28 00:00:00', '0000-00-00 00:00:00'),
-(9, 'อาหารตามสั่ง', 0, '2022-11-28 00:00:00', '0000-00-00 00:00:00'),
-(10, 'อาหารทะเล', 1, '2022-11-28 00:00:00', '0000-00-00 00:00:00'),
-(11, 'แฮมเบอร์เกอร์', 0, '2022-11-28 00:00:00', '0000-00-00 00:00:00'),
-(12, 'ไก่ทอด', 0, '2022-11-28 00:00:00', '0000-00-00 00:00:00'),
-(13, 'ชาบู/สุกี้', 0, '2022-11-28 00:00:00', '0000-00-00 00:00:00'),
-(14, 'ชานมไข่มุก', 0, '2022-11-28 00:00:00', '0000-00-00 00:00:00'),
-(15, 'เบเกอรี่', 0, '2022-11-28 00:00:00', '0000-00-00 00:00:00'),
-(16, 'เครื่องดื่ม', 0, '2022-11-28 00:00:00', '0000-00-00 00:00:00'),
-(17, 'ของหวาน', 0, '2022-11-28 00:00:00', '0000-00-00 00:00:00'),
-(18, 'ของทอด', 0, '2022-11-28 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `restaurant_types` (`id`, `title`, `thumbnail`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'อาหารอีสาน1', '/storage/restaurant_type/eaa8275c0a8a016093a0034500ef722d.png', 1, '2022-11-28 16:04:15', '2022-12-11 13:25:18'),
+(2, 'อาหารอินเดีย', '/storage/restaurant_type/dfb67fb48d9da0004a7e738809651979.png', 1, '2022-11-28 00:00:00', '2022-12-11 13:25:54'),
+(3, 'อาหารใต้', '/storage/restaurant_type/1d5d39888193bdb72ab7fc1c9ce8302e.png', 1, '2022-11-28 00:00:00', '2022-12-11 13:26:27'),
+(19, 'อาหารไทย', '/storage/restaurant_type/af895fbe81a26191cdc7d8e122a8b99b.png', 1, '2022-12-11 13:32:51', '2022-12-11 13:33:40'),
+(20, 'อาหารนานาชาติ', '/storage/restaurant_type/3ac449820d44c18443b349046c62fb59.png', 1, '2022-12-11 13:34:34', '2022-12-11 13:34:34');
 
 -- --------------------------------------------------------
 
@@ -111,8 +117,10 @@ CREATE TABLE `users` (
   `user_type` varchar(20) COLLATE utf8_bin NOT NULL DEFAULT 'customer',
   `thumbnail` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '/storage/profiles/no-thumbnail.jpg',
   `address` varchar(255) COLLATE utf8_bin NOT NULL,
-  `zip_code` varchar(5) COLLATE utf8_bin NOT NULL,
-  `province_id` int(11) NOT NULL DEFAULT '1',
+  `restaurant_name` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `restaurant_type_id` int(11) NOT NULL DEFAULT '0',
+  `restaurant_address` varchar(255) COLLATE utf8_bin NOT NULL,
+  `restaurant_thumbnail` varchar(255) COLLATE utf8_bin NOT NULL,
   `mobile_no` varchar(50) COLLATE utf8_bin NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL,
@@ -123,26 +131,32 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `password`, `email`, `firstname`, `lastname`, `user_type`, `thumbnail`, `address`, `zip_code`, `province_id`, `mobile_no`, `status`, `created_at`, `updated_at`) VALUES
-(1, '969d4e0dac684705b014dd00b501e63c', 'admin@demo.com', 'admin', 'demo', 'admin', '/storage/profiles/no-thumbnail.jpg', '240 Nai Mueang, Mueang, Chaiyaphum', '36000', 2, '096-520-7008', 1, '2022-11-21 04:02:24', '2022-11-28 11:03:03'),
-(2, '969d4e0dac684705b014dd00b501e63c', 'staff@demo.com', 'staff', 'demo', 'staff', '/storage/profiles/no-thumbnail.jpg', '', '', 1, '', 1, '2022-11-21 04:02:24', '2022-11-21 04:02:24'),
-(3, '969d4e0dac684705b014dd00b501e63c', 'rider@demo.com', 'rider', 'demo', 'rider', '/storage/profiles/no-thumbnail.jpg', '18/116 ซอยสุขสวัสดิ์ 30 แยก 8-2', '10140', 1, '0965207008', 1, '2022-11-21 04:02:24', '2022-11-28 15:05:47'),
-(4, '969d4e0dac684705b014dd00b501e63c', 'customer@demo.com', 'customer', 'demo', 'customer', '/storage/profiles/no-thumbnail.jpg', '18/116 ซอยสุขสวัสดิ์ 30 แยก 8-2', '10140', 1, '0965207008', 1, '2022-11-21 04:02:24', '2022-11-28 15:03:31');
+INSERT INTO `users` (`id`, `password`, `email`, `firstname`, `lastname`, `user_type`, `thumbnail`, `address`, `restaurant_name`, `restaurant_type_id`, `restaurant_address`, `restaurant_thumbnail`, `mobile_no`, `status`, `created_at`, `updated_at`) VALUES
+(1, '969d4e0dac684705b014dd00b501e63c', 'admin@demo.com', 'admin', 'demo', 'admin', '/storage/profile/ecf308c276207a3a93d8550b5b833c71.png', '240 Nai Mueang, Mueang, Chaiyaphum', '', 0, '', '', '096-520-7008', 1, '2022-11-21 04:02:24', '2022-12-11 11:57:29'),
+(2, '969d4e0dac684705b014dd00b501e63c', 'staff@demo.com', 'staff', 'demo', 'staff', '/storage/profile/4cd333703b7266c1ff58fb20b216bb2c.png', '18/116 ซอยสุขสวัสดิ์ 30 แยก 8-2', 'ร้านไก่ย่าง 1', 1, '18/116 ซอยสุขสวัสดิ์ 30 แยก 8-2', '/storage/restaurant/6f8225107bc367e850760bfbc5a689fb.png', '0965207008', 1, '2022-11-21 04:02:24', '2022-12-11 12:49:17'),
+(3, '969d4e0dac684705b014dd00b501e63c', 'rider@demo.com', 'rider', 'demo', 'rider', '/storage/profile/e8c3fac855dc95fd78a08363cf459a5f.png', '18/116 ซอยสุขสวัสดิ์ 30 แยก 8-2', '', 0, '', '', '0965207008', 1, '2022-11-21 04:02:24', '2022-12-11 11:50:12'),
+(4, '969d4e0dac684705b014dd00b501e63c', 'customer@demo.com', 'customer', 'demo', 'customer', '/storage/profile/2dd345c57ed613648079d161721700fd.png', '18/116 ซอยสุขสวัสดิ์ 30 แยก 8-2', '', 0, '', '', '0965207008', 1, '2022-11-21 04:02:24', '2022-12-11 11:57:50');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `provinces`
+-- Indexes for table `cart`
 --
-ALTER TABLE `provinces`
+ALTER TABLE `cart`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `restaurants`
+-- Indexes for table `food_categories`
 --
-ALTER TABLE `restaurants`
+ALTER TABLE `food_categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `food_menus`
+--
+ALTER TABLE `food_menus`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -162,25 +176,31 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `provinces`
+-- AUTO_INCREMENT for table `cart`
 --
-ALTER TABLE `provinces`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `cart`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `restaurants`
+-- AUTO_INCREMENT for table `food_categories`
 --
-ALTER TABLE `restaurants`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `food_categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `food_menus`
+--
+ALTER TABLE `food_menus`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `restaurant_types`
 --
 ALTER TABLE `restaurant_types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
