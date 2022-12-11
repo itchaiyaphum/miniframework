@@ -8,7 +8,9 @@ class Customer_cart extends Controller
         $data['title'] = 'แสดงตะกร้าสินค้า - ระบบสั่งอาหารออนไลน์';
         $data['items'] = $this->app->customer_cart_lib->get_items();
         $data['active_menu'] = 'cart';
+        $data['multiple_restaurant'] = $this->app->customer_cart_lib->is_multiple_restaurant_order();
         $data['left_menu'] = $this->app->view('customer/menu', $data, true);
+        $data['profile'] = $this->app->profile_lib->get_profile();
 
         $this->app->view('header', $data);
         $this->app->view('nav', $data);
@@ -16,25 +18,18 @@ class Customer_cart extends Controller
         $this->app->view('footer');
     }
 
-    public function delete()
-    {
-        $order_id = $this->app->input_lib->get_post('id');
-        $item_id = $this->app->input_lib->get_post('item_id');
-
-        $this->app->customer_cart_lib->delete_item($order_id, $item_id);
-
-        redirect('/customer_cart.php?id='.$order_id);
-    }
-
+    // สั่งซื้ออาหาร
     public function order()
     {
-        $order_id = $this->app->input_lib->get_post('id');
+        if ($this->app->customer_cart_lib->order()) {
+            redirect('/customer_cart.php?action=order_completed');
 
-        $this->app->customer_cart_lib->order($order_id);
-
-        redirect('/customer_cart.php?action=order_completed&id='.$order_id);
+            return true;
+        }
+        redirect('/customer_cart.php');
     }
 
+    // สั่งซื้ออาหารเรียบร้อย
     public function order_completed()
     {
         $data = [];
@@ -43,5 +38,13 @@ class Customer_cart extends Controller
         $this->app->view('header', $data);
         $this->app->view('customer/cart/order_completed', $data);
         $this->app->view('footer');
+    }
+
+    // ลบรายการอาหารในตระกร้าสินค้า
+    public function delete()
+    {
+        $id = $this->app->input_lib->get_post('id');
+        $this->app->customer_cart_lib->delete('cart', $id);
+        redirect('/customer_cart.php');
     }
 }

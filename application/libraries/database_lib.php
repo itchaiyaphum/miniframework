@@ -78,6 +78,11 @@ class Database_lib extends Library
         return $this->db->query($sql);
     }
 
+    public function get_insert_id()
+    {
+        return $this->db->insert_id;
+    }
+
     // update data
     public function update($table_name = null, $data = null, $where = null)
     {
