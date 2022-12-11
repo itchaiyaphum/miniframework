@@ -22,17 +22,17 @@ class Admin_restaurants extends Controller
         $this->app->view('footer');
     }
 
-    public function publish()
+    public function approve()
     {
         $id = $this->app->input_lib->get_post('id');
-        $this->app->admin_restaurants_lib->publish('restaurants', $id);
+        $this->app->admin_restaurants_lib->publish('users', $id);
         redirect('/admin_restaurants.php');
     }
 
-    public function trash()
+    public function cancel()
     {
         $id = $this->app->input_lib->get_post('id');
-        $this->app->admin_restaurants_lib->trash('restaurants', $id);
+        $this->app->admin_restaurants_lib->delete('users', $id);
         redirect('/admin_restaurants.php');
     }
 }

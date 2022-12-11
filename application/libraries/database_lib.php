@@ -40,7 +40,7 @@ class Database_lib extends Library
             return $this->result->fetch_all(MYSQLI_ASSOC);
         }
 
-        return false;
+        return [];
     }
 
     public function row()
@@ -49,7 +49,7 @@ class Database_lib extends Library
             return $this->result->fetch_array(MYSQLI_ASSOC);
         }
 
-        return false;
+        return [];
     }
 
     // insert data

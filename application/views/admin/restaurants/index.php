@@ -22,18 +22,24 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <h2>รออนุมัติ (5 ร้าน)</h2>
+                            <h2>รออนุมัติ</h2>
                             <div class="row">
                                 <?php
-                                for ($i = 0; $i < 5; ++$i) {
+                                for ($i = 0; $i < count($this->data['items']); ++$i) {
+                                    $item = $this->data['items'][$i];
+                                    $approve_link = "/admin_restaurants.php?action=approve&id={$item['id']}";
+
+                                    if ($item['status'] != 0) {
+                                        continue;
+                                    }
                                     ?>
                                 <div class="col-4">
                                     <div class="card mb-4">
-                                        <img src="/assets/img/admin_index.png" width="100%" class="card-img-top">
+                                        <img src="<?php echo $item['restaurant_thumbnail']; ?>" width="100%"
+                                            class="card-img-top">
                                         <div class="card-body text-center">
-                                            <h5 class="card-title">ร้านไข่ต้ม <?php echo $i + 1; ?></h5>
-                                            <p class="card-text">(อาหารอีสาน)</p>
-                                            <a href="#" class="btn btn-primary">อนุมัติ</a>
+                                            <h5 class="card-title"><?php echo $item['restaurant_name']; ?></h5>
+                                            <a href="<?php echo $approve_link; ?>" class="btn btn-primary">อนุมัติ</a>
                                         </div>
                                     </div>
                                 </div>
@@ -43,28 +49,33 @@
                             </div>
 
                             <br /><br />
-                            <h2>อนุมัติแล้ว (5 ร้าน)</h2>
+                            <h2>อนุมัติแล้ว</h2>
                             <div class="row">
                                 <?php
-            for ($i = 0; $i < 5; ++$i) {
-                ?>
+                                for ($i = 0; $i < count($this->data['items']); ++$i) {
+                                    $item = $this->data['items'][$i];
+                                    $cancel_link = "/admin_restaurants.php?action=cancel&id={$item['id']}";
+
+                                    if ($item['status'] != 1) {
+                                        continue;
+                                    }
+                                    ?>
                                 <div class="col-4">
                                     <div class="card mb-4">
-                                        <img src="/assets/img/admin_index.png" width="100%" class="card-img-top">
+                                        <img src="<?php echo $item['restaurant_thumbnail']; ?>" width="100%"
+                                            class="card-img-top">
                                         <div class="card-body text-center">
-                                            <h5 class="card-title">Fuji <?php echo $i + 1; ?></h5>
-                                            <p class="card-text">(อาหารญี่ปุ่น)</p>
-                                            <a href="#" class="btn btn-danger">ยกเลิก</a>
+                                            <h5 class="card-title"><?php echo $item['restaurant_name']; ?></h5>
+                                            <a href="<?php echo $cancel_link; ?>" class="btn btn-danger">ยกเลิก</a>
                                         </div>
                                     </div>
                                 </div>
                                 <?php
-            }
+                                }
             ?>
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" name="filter_status" value="all" />
                 </form>
             </div>
             <!-- end: main content -->
