@@ -30,15 +30,16 @@
                         <div class="card-body">
                             <div class="row">
                                 <?php
-                                for ($i = 0; $i < 5; ++$i) {
-                                    $edit_link = "/admin_restaurant_types.php?action=edit&id={$i}";
-                                    $delete_link = "/admin_restaurant_types.php?action=delete&id={$i}";
+                                for ($i = 0; $i < count($this->data['items']); ++$i) {
+                                    $item = $this->data['items'][$i];
+                                    $edit_link = "/admin_restaurant_types.php?action=edit&id={$item['id']}";
+                                    $delete_link = "/admin_restaurant_types.php?action=delete&id={$item['id']}";
                                     ?>
                                 <div class="col-4">
                                     <div class="card mb-4">
-                                        <img src="/assets/img/admin_index.png" width="100%" class="card-img-top">
+                                        <img src="<?php echo $item['thumbnail']; ?>" width="100%" class="card-img-top">
                                         <div class="card-body text-center">
-                                            <h5 class="card-title">อาหารอีสาน <?php echo $i + 1; ?></h5>
+                                            <h5 class="card-title"><?php echo $item['title']; ?></h5>
                                             <a href="<?php echo $edit_link; ?>" class="btn btn-primary">แก้ไข</a>
                                             <a href="<?php echo $delete_link; ?>" class="btn btn-danger">ลบ</a>
                                         </div>
@@ -50,7 +51,6 @@
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" name="filter_status" value="all" />
                 </form>
             </div>
             <!-- end: main content -->

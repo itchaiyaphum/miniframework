@@ -16,6 +16,11 @@ function base_url($url = '')
     return $base_url.$url;
 }
 
+function array_value($array_data = null, $default = '')
+{
+    return (isset($array_data)) ? $array_data : $default;
+}
+
 function active_menu($data = null, $index = null)
 {
     return ($data == $index) ? 'active' : '';
