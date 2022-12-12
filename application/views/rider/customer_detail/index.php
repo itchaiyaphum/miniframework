@@ -10,26 +10,23 @@
             </div>
 
             <div class="col-lg-9 mt-3">
-                <?php echo validation_errors(); ?>
-                <?php echo action_messages(); ?>
                 <div class="card mb-5">
                     <div class="card-header">
                         <h2 class="card-title h4">แสดงข้อมูลผู้สั่งอาหาร</h2>
                     </div>
                     <div class="card-body">
-                        <form id="profileForm" class="needs-validation" method="post" novalidate>
-
+                        <form id="mainForm">
                             <div class="row mb-4">
                                 <label class="col-sm-3 col-form-label form-label">ชื่อ-นามสกุล</label>
                                 <div class="col-sm-9">
-                                    <div class="form-control">AODTO WK</div>
+                                    <div class="form-control"><?php echo $this->data['customer_detail']->firstname.' '.$this->data['customer_detail']->lastname; ?></div>
                                 </div>
                             </div>
 
                             <div class="row mb-4">
                                 <label class="col-sm-3 col-form-label form-label">เบอร์โทร</label>
                                 <div class="col-sm-9">
-                                    <div class="form-control"> 096-520-7000</div>
+                                    <div class="form-control"><?php echo $this->data['customer_detail']->mobile_no; ?></div>
                                 </div>
                             </div>
 
@@ -39,8 +36,7 @@
                                     class="col-sm-3 col-form-label form-label">ที่อยู่</label>
                                 <div class="col-sm-9">
                                     <div class="form-control">
-                                        240, Nai Mueang Subdistrict, Mueang District, Chaiyaphum Province. Postal code
-                                        36000
+                                    <?php echo $this->data['customer_detail']->address; ?>
                                     </div>
                                 </div>
                             </div>
@@ -51,7 +47,7 @@
                                 <label for="thumbnailLabel"
                                     class="col-sm-3 col-form-label form-label">รูปภาพประจำตัว</label>
                                 <div class="col-sm-9">
-                                    <img src="/assets/img/admin_index.png" class="mb-3 w-25">
+                                    <img src="<?php echo $this->data['customer_detail']->thumbnail; ?>" class="mb-3 w-25">
                                 </div>
                             </div>
                             <!-- end field: thumbnail -->

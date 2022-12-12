@@ -1,6 +1,6 @@
 <?php
 
-class Rider_order_delivery extends Base_app
+class Rider_order_delivery extends Controller
 {
     public function index()
     {
@@ -23,22 +23,6 @@ class Rider_order_delivery extends Base_app
         $this->app->rider_order_delivery_lib->accept_order($order_id);
 
         redirect('/rider_order_delivery.php');
-    }
-
-    public function customer_detail()
-    {
-        $customer_id = $this->app->input_lib->get_post('customer_id');
-
-        $data = [];
-        $data['title'] = 'รายละเอียดลูกค้า - ระบบสั่งอาหารออนไลน์';
-        $data['customer_detail'] = $this->app->rider_order_delivery_lib->customer_detail($customer_id);
-        $data['active_menu'] = 'order_delivery';
-        $data['left_menu'] = $this->app->view('rider/menu', $data, true);
-
-        $this->app->view('header', $data);
-        $this->app->view('nav', $data);
-        $this->app->view('rider/order_delivery/customer_detail', $data);
-        $this->app->view('footer');
     }
 
     public function delivery_complete()
