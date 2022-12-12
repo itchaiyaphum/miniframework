@@ -86,6 +86,7 @@ class Customer_cart_lib extends Library
             'restaurant_id' => $restaurant_id,
             'total_price' => $total_summary_price,
             'status' => 0,
+            'review_status' => 0,
             'created_at' => now(),
             'updated_at' => now(),
         ];

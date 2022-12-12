@@ -19,7 +19,7 @@ class Customer_history_order_lib extends Library
         return $items;
     }
 
-    public function get_food_items($order_id = 0)
+    public function get_food_items()
     {
         $profile = $this->app->profile_lib->get_profile();
         $profile_id = $profile->id;

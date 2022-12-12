@@ -76,7 +76,7 @@
                                 <div class="text-bg-light p-2 d-flex justify-content-between">
                                     <h6>รหัสการสั่งซื้อ: #<?php echo $item['id']; ?></h6>
                                     <?php
-                                    if ($item['status'] == 3) {
+                                    if ($item['status'] == 3 && $item['review_status'] == 0) {
                                         ?>
                                     <div>
                                         <a href="<?php echo $review_link; ?>" class="btn btn-primary">รีวิวอาหาร</a>
