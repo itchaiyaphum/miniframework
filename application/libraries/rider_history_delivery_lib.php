@@ -12,7 +12,7 @@ class Rider_history_delivery_lib extends Library
                 , u.restaurant_name as `restaurant_name` 
                 , u.thumbnail as `restaurant_thumbnail` 
                 FROM `orders` as o
-                LEFT JOIN `users` as u ON(o.rider_id=u.id) WHERE {$where} ORDER BY o.created_at DESC";
+                LEFT JOIN `users` as u ON(o.restaurant_id=u.id) WHERE {$where} ORDER BY o.created_at DESC";
         $query = $this->app->database_lib->query($sql);
         $items = $query->result();
 

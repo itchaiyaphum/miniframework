@@ -4,9 +4,14 @@ class Rider_order_delivery extends Controller
 {
     public function index()
     {
+        $restaurant_id = $this->app->input_lib->get_post('restaurant_id', 0);
+
         $data = [];
         $data['title'] = 'รายการอาหารที่รอจัดส่ง - ระบบสั่งอาหารออนไลน์';
-        $data['items'] = $this->app->rider_order_delivery_lib->get_items();
+        $data['restaurants'] = $this->app->rider_order_delivery_lib->get_restaurant_items();
+        $data['order_items'] = $this->app->rider_order_delivery_lib->get_order_items();
+        $data['food_items'] = $this->app->rider_order_delivery_lib->get_food_items();
+        $data['restaurant_id'] = $restaurant_id;
         $data['active_menu'] = 'order_delivery';
         $data['left_menu'] = $this->app->view('rider/menu', $data, true);
 
@@ -18,7 +23,7 @@ class Rider_order_delivery extends Controller
 
     public function accept_order()
     {
-        $order_id = $this->app->input_lib->get_post('order_id');
+        $order_id = $this->app->input_lib->get_post('id');
 
         $this->app->rider_order_delivery_lib->accept_order($order_id);
 
