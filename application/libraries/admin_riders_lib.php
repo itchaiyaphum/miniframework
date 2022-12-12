@@ -5,7 +5,7 @@ class Admin_riders_lib extends Library
     public function get_items($options = [])
     {
         $where = $this->get_query_where($options);
-        $sql = "SELECT * FROM `users` WHERE {$where}";
+        $sql = "SELECT * FROM `user` WHERE {$where}";
         $query = $this->app->database_lib->query($sql);
         $items = $query->result();
 

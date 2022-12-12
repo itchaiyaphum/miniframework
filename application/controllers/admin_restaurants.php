@@ -25,14 +25,14 @@ class Admin_restaurants extends Controller
     public function approve()
     {
         $id = $this->app->input_lib->get_post('id');
-        $this->app->admin_restaurants_lib->publish('users', $id);
+        $this->app->admin_restaurants_lib->publish('user', $id);
         redirect('/admin_restaurants.php');
     }
 
     public function cancel()
     {
         $id = $this->app->input_lib->get_post('id');
-        $this->app->admin_restaurants_lib->delete('users', $id);
+        $this->app->admin_restaurants_lib->delete('user', $id);
         redirect('/admin_restaurants.php');
     }
 }

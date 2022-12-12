@@ -25,14 +25,14 @@ class Admin_riders extends Controller
     public function approve()
     {
         $id = $this->app->input_lib->get_post('id');
-        $this->app->admin_riders_lib->publish('users', $id);
+        $this->app->admin_riders_lib->publish('user', $id);
         redirect('/admin_riders.php');
     }
 
     public function cancel()
     {
         $id = $this->app->input_lib->get_post('id');
-        $this->app->admin_riders_lib->unpublish('users', $id);
+        $this->app->admin_riders_lib->unpublish('user', $id);
         redirect('/admin_riders.php');
     }
 }

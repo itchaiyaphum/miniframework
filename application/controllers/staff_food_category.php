@@ -51,7 +51,7 @@ class Staff_food_category extends Controller
     public function delete()
     {
         $id = $this->app->input_lib->get_post('id');
-        $this->app->staff_food_category_lib->delete('food_categories', $id);
+        $this->app->staff_food_category_lib->delete('food_category', $id);
         redirect('/staff_food_category.php');
     }
 }

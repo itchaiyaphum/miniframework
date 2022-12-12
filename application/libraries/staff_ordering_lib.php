@@ -12,8 +12,8 @@ class Staff_ordering_lib extends Library
                 , u.firstname as `customer_firstname` 
                 , u.lastname as `customer_lastname` 
                 , u.thumbnail as `customer_thumbnail` 
-                FROM `orders` as o
-                LEFT JOIN `users` as u ON(o.restaurant_id=u.id) WHERE {$where} ORDER BY o.created_at DESC";
+                FROM `order` as o
+                LEFT JOIN `user` as u ON(o.restaurant_id=u.id) WHERE {$where} ORDER BY o.created_at DESC";
         $query = $this->app->database_lib->query($sql);
         $items = $query->result();
 
@@ -30,8 +30,8 @@ class Staff_ordering_lib extends Library
                 , u.email as `email` 
                 , u.address as `address` 
                 , u.thumbnail as `thumbnail` 
-                FROM `orders` as o
-                LEFT JOIN `users` as u ON(o.customer_id=u.id) WHERE {$where}";
+                FROM `order` as o
+                LEFT JOIN `user` as u ON(o.customer_id=u.id) WHERE {$where}";
         $query = $this->app->database_lib->query($sql);
         $item = $query->row();
 
@@ -40,14 +40,14 @@ class Staff_ordering_lib extends Library
 
     public function get_invoice_food_items($id = 0)
     {
-        $where = "oi.order_id IN (SELECT id FROM orders WHERE id={$id})";
+        $where = "oi.order_id IN (SELECT id FROM order WHERE id={$id})";
         $sql = "SELECT oi.*
                 , fm.title as `food_name` 
                 , fm.price as `food_price` 
                 , fm.discount_percent as `food_discount_percent` 
                 , fm.thumbnail as `food_thumbnail` 
-                FROM `orders_items` as oi
-                LEFT JOIN `food_menus` as fm ON(oi.food_id=fm.id) WHERE {$where}";
+                FROM `order_item` as oi
+                LEFT JOIN `food_menu` as fm ON(oi.food_id=fm.id) WHERE {$where}";
         $query = $this->app->database_lib->query($sql);
         $items = $query->result();
 
@@ -59,14 +59,14 @@ class Staff_ordering_lib extends Library
         $profile = $this->app->profile_lib->get_profile();
         $profile_id = $profile->id;
 
-        $where = "oi.order_id IN(SELECT `id` FROM `orders` WHERE `restaurant_id`={$profile_id})";
+        $where = "oi.order_id IN(SELECT `id` FROM `order` WHERE `restaurant_id`={$profile_id})";
         $sql = "SELECT oi.*
                 , fm.title as `food_name` 
                 , fm.price as `food_price` 
                 , fm.discount_percent as `food_discount_percent` 
                 , fm.thumbnail as `food_thumbnail` 
-                FROM `orders_items` as oi
-                LEFT JOIN `food_menus` as fm ON(oi.food_id=fm.id) WHERE {$where}";
+                FROM `order_item` as oi
+                LEFT JOIN `food_menu` as fm ON(oi.food_id=fm.id) WHERE {$where}";
         $query = $this->app->database_lib->query($sql);
         $items = $query->result();
 
@@ -80,15 +80,15 @@ class Staff_ordering_lib extends Library
         ];
         $where = "id={$id}";
 
-        return $this->app->database_lib->update('orders', $data, $where);
+        return $this->app->database_lib->update('order', $data, $where);
     }
 
     public function cancel_order($id = 0)
     {
-        // delete orders
-        $this->app->database_lib->delete('orders', "id={$id}");
-        // delete orders items
-        $this->app->database_lib->delete('orders_items', "order_id={$id}");
+        // delete order
+        $this->app->database_lib->delete('order', "id={$id}");
+        // delete order item
+        $this->app->database_lib->delete('order_item', "order_id={$id}");
 
         return true;
     }

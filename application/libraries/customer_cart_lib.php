@@ -14,7 +14,7 @@ class Customer_cart_lib extends Library
                 , fm.discount_percent as `food_discount_percent` 
                 , fm.thumbnail as `food_thumbnail` 
                 FROM `cart`
-                LEFT JOIN `food_menus` as fm ON(cart.food_id=fm.id) WHERE {$where}";
+                LEFT JOIN `food_menu` as fm ON(cart.food_id=fm.id) WHERE {$where}";
         $query = $this->app->database_lib->query($sql);
         $items = $query->result();
 
@@ -38,11 +38,6 @@ class Customer_cart_lib extends Library
         return false;
     }
 
-    public function delete_item($order_id = 0, $item_id = 0)
-    {
-        return true;
-    }
-
     /*
     status: 0 = รอการยืนยันสั่งซื้อ (customer)
     status: 1 = ยืนยันสั่งซื้ออาหารแล้ว (staff)
@@ -59,7 +54,7 @@ class Customer_cart_lib extends Library
                 ,fm.price as price
                 ,fm.discount_percent as discount_percent
                 FROM `cart` 
-                LEFT JOIN food_menus as fm ON (cart.food_id=fm.id)
+                LEFT JOIN food_menu as fm ON (cart.food_id=fm.id)
                 WHERE cart.user_id={$profile_id}";
         $cart_items = $this->app->database_lib->query($sql)->result();
         if (empty($cart_items)) {
@@ -93,7 +88,7 @@ class Customer_cart_lib extends Library
         ];
 
         // บันทึกข้อมูลลงใน database
-        if (!$this->app->database_lib->insert('orders', $data)) {
+        if (!$this->app->database_lib->insert('order', $data)) {
             return false;
         }
         $order_id = $this->app->database_lib->get_insert_id();
@@ -115,7 +110,7 @@ class Customer_cart_lib extends Library
                 'food_amount' => $food_amount,
                 'food_total' => $total_price,
             ];
-            $this->app->database_lib->insert('orders_items', $data);
+            $this->app->database_lib->insert('order_item', $data);
         }
 
         // เมื่อสั่งซื้อเรียบร้อย ให้ทำการเครียร์ตะกร้าสินค้าให้ว่าง

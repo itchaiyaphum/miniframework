@@ -25,14 +25,14 @@ class Admin_customer extends Controller
     public function approve()
     {
         $id = $this->app->input_lib->get_post('id');
-        $this->app->admin_customer_lib->publish('users', $id);
+        $this->app->admin_customer_lib->publish('user', $id);
         redirect('/admin_customer.php');
     }
 
     public function cancel()
     {
         $id = $this->app->input_lib->get_post('id');
-        $this->app->admin_customer_lib->unpublish('users', $id);
+        $this->app->admin_customer_lib->unpublish('user', $id);
         redirect('/admin_customer.php');
     }
 }

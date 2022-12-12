@@ -5,8 +5,8 @@ class Customer_restaurants_lib extends Library
     public function get_items($options = [])
     {
         $where = $this->get_query_where($options);
-        $sql = "SELECT users.*, rt.title as `restaurant_type_name` FROM `users`
-                LEFT JOIN `restaurant_types` as rt ON(users.id=rt.id) WHERE {$where}";
+        $sql = "SELECT user.*, rt.title as `restaurant_type_name` FROM `user`
+                LEFT JOIN `restaurant_type` as rt ON(user.id=rt.id) WHERE {$where}";
         $query = $this->app->database_lib->query($sql);
         $items = $query->result();
 
@@ -16,8 +16,8 @@ class Customer_restaurants_lib extends Library
     public function get_item($id = 0, $options = [])
     {
         $where = $this->get_query_where($options);
-        $sql = "SELECT users.*, rt.title as `restaurant_type_name` FROM `users`
-                LEFT JOIN `restaurant_types` as rt ON(users.id=rt.id) WHERE {$where}";
+        $sql = "SELECT user.*, rt.title as `restaurant_type_name` FROM `user`
+                LEFT JOIN `restaurant_type` as rt ON(user.id=rt.id) WHERE {$where}";
         $query = $this->app->database_lib->query($sql);
         $item = $query->row();
 
@@ -32,13 +32,13 @@ class Customer_restaurants_lib extends Library
         $wheres = [];
 
         // filter: status
-        $wheres[] = 'users.status IN(0,1)';
-        $wheres[] = "users.user_type='staff'";
+        $wheres[] = 'user.status IN(0,1)';
+        $wheres[] = "user.user_type='staff'";
 
         // filter: search
         if ($filter_search != '') {
             $filter_search_value = $filter_search;
-            $wheres[] = "(users.restaurant_name LIKE '%{$filter_search_value}%')";
+            $wheres[] = "(user.restaurant_name LIKE '%{$filter_search_value}%')";
         }
 
         // render query
@@ -47,7 +47,7 @@ class Customer_restaurants_lib extends Library
 
     public function get_food_categories()
     {
-        $sql = 'SELECT * FROM `food_categories` WHERE `status` IN (1)';
+        $sql = 'SELECT * FROM `food_category` WHERE `status` IN (1)';
         $query = $this->app->database_lib->query($sql);
         $items = $query->result();
 
@@ -62,8 +62,8 @@ class Customer_restaurants_lib extends Library
             $where_food_category = "AND fm.food_category_id={$food_category_id}";
         }
 
-        $sql = "SELECT fm.*, fc.title as `food_category_name` FROM `food_menus` as fm 
-                LEFT JOIN `food_categories` as fc ON(fm.food_category_id=fc.id) WHERE fm.restaurant_id={$restaurant_id} {$where_food_category}";
+        $sql = "SELECT fm.*, fc.title as `food_category_name` FROM `food_menu` as fm 
+                LEFT JOIN `food_category` as fc ON(fm.food_category_id=fc.id) WHERE fm.restaurant_id={$restaurant_id} {$where_food_category}";
         $query = $this->app->database_lib->query($sql);
         $items = $query->result();
 
@@ -72,10 +72,11 @@ class Customer_restaurants_lib extends Library
 
     public function get_reviews()
     {
-        $sql = 'SELECT reviews.*
-                    , users.firstname as `customer_firstname`
-                    ,users.lastname as `customer_lastname` FROM `reviews`
-                LEFT JOIN `users` ON(reviews.user_id=users.id)';
+        $sql = 'SELECT review.*
+                    , user.firstname as `customer_firstname`
+                    ,user.lastname as `customer_lastname` 
+                FROM `review`
+                LEFT JOIN `user` ON(review.user_id=user.id)';
         $query = $this->app->database_lib->query($sql);
         $items = $query->result();
 

@@ -33,7 +33,7 @@ class Profile_lib extends Library
     {
         (!empty($email)) or $email = $this->app->session_lib->get('email');
 
-        $query = $this->app->database_lib->query('SELECT * FROM users WHERE email="'.$email.'"');
+        $query = $this->app->database_lib->query('SELECT * FROM user WHERE email="'.$email.'"');
         $result = $query->row();
 
         if (!empty($result)) {
@@ -47,7 +47,7 @@ class Profile_lib extends Library
 
     public function get_profile_by_id($id = 0)
     {
-        $query = $this->app->database_lib->query("SELECT * FROM users WHERE id={$id}");
+        $query = $this->app->database_lib->query("SELECT * FROM user WHERE id={$id}");
         $result = $query->row();
 
         if (!empty($result)) {
@@ -79,7 +79,7 @@ class Profile_lib extends Library
         $where = 'id='.$profile_data['id'];
 
         // insert register data to database
-        return $this->app->database_lib->update('users', $data, $where);
+        return $this->app->database_lib->update('user', $data, $where);
     }
 
     public function change_password($profile_data = [])
@@ -114,7 +114,7 @@ class Profile_lib extends Library
         $where = 'id='.$profile_data['id'];
 
         // insert register data to database
-        return $this->app->database_lib->update('users', $data, $where);
+        return $this->app->database_lib->update('user', $data, $where);
     }
 
     public function get_user_type()

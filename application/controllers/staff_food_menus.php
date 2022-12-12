@@ -57,7 +57,7 @@ class Staff_food_menus extends Controller
     public function delete()
     {
         $id = $this->app->input_lib->get_post('id');
-        $this->app->staff_food_menus_lib->delete('food_menus', $id);
+        $this->app->staff_food_menus_lib->delete('food_menu', $id);
         redirect('/staff_food_menus.php');
     }
 }

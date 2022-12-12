@@ -9,7 +9,7 @@ class Admin_restaurant_types_lib extends Library
         // หากค่า id ไม่เท่ากับ 0 แสดงว่าคือการอัพเดต
         if ($form_data['id'] != 0) {
             // ดึงข้อมูลเดิมมาจาก database
-            $sql = "SELECT * FROM `restaurant_types` WHERE `id`={$form_data['id']}";
+            $sql = "SELECT * FROM `restaurant_type` WHERE `id`={$form_data['id']}";
             $data_db = $this->app->database_lib->query($sql)->row();
 
             if (empty($data_db)) {
@@ -42,7 +42,7 @@ class Admin_restaurant_types_lib extends Library
                 'updated_at' => now(),
             ];
 
-            return $this->app->database_lib->insert('restaurant_types', $data);
+            return $this->app->database_lib->insert('restaurant_type', $data);
         }
         // หากไม่ใช่ ก็คือการ อัพเดต
         else {
@@ -54,14 +54,14 @@ class Admin_restaurant_types_lib extends Library
             ];
             $where = "`id`={$form_data['id']}";
 
-            return $this->app->database_lib->update('restaurant_types', $data, $where);
+            return $this->app->database_lib->update('restaurant_type', $data, $where);
         }
     }
 
     public function get_items($options = [])
     {
         $where = $this->get_query_where($options);
-        $sql = "SELECT * FROM `restaurant_types` WHERE {$where}";
+        $sql = "SELECT * FROM `restaurant_type` WHERE {$where}";
         $query = $this->app->database_lib->query($sql);
         $items = $query->result();
 
@@ -70,7 +70,7 @@ class Admin_restaurant_types_lib extends Library
 
     public function get_item($id = 0)
     {
-        $sql = "SELECT * FROM restaurant_types WHERE id={$id}";
+        $sql = "SELECT * FROM restaurant_type WHERE id={$id}";
         $query = $this->app->database_lib->query($sql);
         $item = $query->row();
 

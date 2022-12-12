@@ -51,7 +51,7 @@ class Admin_restaurant_types extends Controller
     public function delete()
     {
         $id = $this->app->input_lib->get_post('id');
-        $this->app->admin_restaurant_types_lib->delete('restaurant_types', $id);
+        $this->app->admin_restaurant_types_lib->delete('restaurant_type', $id);
         redirect('/admin_restaurant_types.php');
     }
 }

@@ -8,8 +8,8 @@ class Customer_food_review_lib extends Library
         $sql = "SELECT o.*
                 , u.restaurant_name as `restaurant_name` 
                 , u.thumbnail as `restaurant_thumbnail` 
-                FROM `orders` as o
-                LEFT JOIN `users` as u ON(o.customer_id=u.id) WHERE {$where} ORDER BY o.created_at DESC";
+                FROM `order` as o
+                LEFT JOIN `user` as u ON(o.customer_id=u.id) WHERE {$where} ORDER BY o.created_at DESC";
         $query = $this->app->database_lib->query($sql);
         $items = $query->result();
 
@@ -24,8 +24,8 @@ class Customer_food_review_lib extends Library
                 , fm.price as `food_price` 
                 , fm.discount_percent as `food_discount_percent` 
                 , fm.thumbnail as `food_thumbnail` 
-                FROM `orders_items` as oi
-                LEFT JOIN `food_menus` as fm ON(oi.food_id=fm.id) WHERE {$where}";
+                FROM `order_item` as oi
+                LEFT JOIN `food_menu` as fm ON(oi.food_id=fm.id) WHERE {$where}";
         $query = $this->app->database_lib->query($sql);
         $items = $query->result();
 
@@ -46,7 +46,7 @@ class Customer_food_review_lib extends Library
             'created_at' => now(),
             'updated_at' => now(),
         ];
-        $this->app->database_lib->insert('reviews', $data);
+        $this->app->database_lib->insert('review', $data);
 
         // ตั้งค่าให้รู้ว่ามีการ review แล้ว
         $data = [
@@ -55,6 +55,6 @@ class Customer_food_review_lib extends Library
         ];
         $review_where = "id={$review_data['id']}";
 
-        return $this->app->database_lib->update('orders', $data, $review_where);
+        return $this->app->database_lib->update('order', $data, $review_where);
     }
 }

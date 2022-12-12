@@ -7,7 +7,7 @@ class Staff_food_category_lib extends Library
         // หากค่า id ไม่เท่ากับ 0 แสดงว่าคือการอัพเดต
         if ($form_data['id'] != 0) {
             // ดึงข้อมูลเดิมมาจาก database
-            $sql = "SELECT * FROM `food_categories` WHERE `id`={$form_data['id']}";
+            $sql = "SELECT * FROM `food_category` WHERE `id`={$form_data['id']}";
             $data_db = $this->app->database_lib->query($sql)->row();
 
             if (empty($data_db)) {
@@ -25,7 +25,7 @@ class Staff_food_category_lib extends Library
                 'updated_at' => now(),
             ];
 
-            return $this->app->database_lib->insert('food_categories', $data);
+            return $this->app->database_lib->insert('food_category', $data);
         }
         // หากไม่ใช่ ก็คือการ อัพเดต
         else {
@@ -36,14 +36,14 @@ class Staff_food_category_lib extends Library
             ];
             $where = "`id`={$form_data['id']}";
 
-            return $this->app->database_lib->update('food_categories', $data, $where);
+            return $this->app->database_lib->update('food_category', $data, $where);
         }
     }
 
     public function get_items($options = [])
     {
         $where = $this->get_query_where($options);
-        $sql = "SELECT * FROM `food_categories` WHERE {$where}";
+        $sql = "SELECT * FROM `food_category` WHERE {$where}";
         $query = $this->app->database_lib->query($sql);
         $items = $query->result();
 
@@ -52,7 +52,7 @@ class Staff_food_category_lib extends Library
 
     public function get_item($id = 0)
     {
-        $sql = "SELECT * FROM `food_categories` WHERE `id`={$id}";
+        $sql = "SELECT * FROM `food_category` WHERE `id`={$id}";
         $query = $this->app->database_lib->query($sql);
         $item = $query->row();
 

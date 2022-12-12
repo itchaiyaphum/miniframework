@@ -20,7 +20,7 @@ class Auth_lib extends Library
         $hash_password = md5($password);
 
         // ดึงค่ามาจาก database ทั้งหมด
-        $query = $this->app->database_lib->query('SELECT * FROM users');
+        $query = $this->app->database_lib->query('SELECT * FROM user');
         $results = $query->result();
 
         if (count($results)) {
@@ -78,7 +78,7 @@ class Auth_lib extends Library
         ];
 
         // บันทึกข้อมูลลงใน database
-        return $this->app->database_lib->insert('users', $data);
+        return $this->app->database_lib->insert('user', $data);
     }
 
     // ตั้งค่า session สำหรับการ login
@@ -110,7 +110,7 @@ class Auth_lib extends Library
 
         $where = "id={$id}";
 
-        return $this->app->database_lib->update('users', $data, $where);
+        return $this->app->database_lib->update('user', $data, $where);
     }
 
     // ยกเลิกการอนุมัติให้เข้าใช้งาน
@@ -122,7 +122,7 @@ class Auth_lib extends Library
 
         $where = "id={$id}";
 
-        return $this->app->database_lib->update('users', $data, $where);
+        return $this->app->database_lib->update('user', $data, $where);
     }
 
     // ระงับการใช้งานชั่วคราว
@@ -134,7 +134,7 @@ class Auth_lib extends Library
 
         $where = "id={$id}";
 
-        return $this->app->database_lib->update('users', $data, $where);
+        return $this->app->database_lib->update('user', $data, $where);
     }
 
     // ออกจากระบบ
@@ -146,7 +146,7 @@ class Auth_lib extends Library
     // ตรวจสอบว่ามีอีเมล์ในระบบ database อยู่หรือไม่
     public function check_email_exists($email = null)
     {
-        $query = $this->app->database_lib->query("SELECT * FROM users WHERE email='{$email}'");
+        $query = $this->app->database_lib->query("SELECT * FROM user WHERE email='{$email}'");
 
         return (!empty($query->result())) ? true : false;
     }

@@ -9,7 +9,7 @@ class Admin_profile_lib extends Library
         $profile_id = $profile->id;
 
         // ดึงข้อมูลเดิมมาจาก database
-        $sql = "SELECT * FROM `users` WHERE `id`={$profile_id}";
+        $sql = "SELECT * FROM `user` WHERE `id`={$profile_id}";
         $data_db = $this->app->database_lib->query($sql)->row();
 
         if (empty($data_db)) {
@@ -60,6 +60,6 @@ class Admin_profile_lib extends Library
         $where = "`id`={$profile_id}";
 
         // บันทึกข้อมูลลงใน database
-        return $this->app->database_lib->update('users', $data_update, $where);
+        return $this->app->database_lib->update('user', $data_update, $where);
     }
 }
