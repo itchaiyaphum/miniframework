@@ -128,6 +128,7 @@ class App
         // rider library
         $this->library('rider_profile_lib');
         $this->library('rider_order_delivery_lib');
+        $this->library('rider_history_delivery_lib');
 
         // staff library
         $this->library('staff_profile_lib');

@@ -22,15 +22,6 @@ class Rider_order_delivery extends Controller
 
         $this->app->rider_order_delivery_lib->accept_order($order_id);
 
-        redirect('/rider_order_delivery.php');
-    }
-
-    public function delivery_complete()
-    {
-        $order_id = $this->app->input_lib->get_post('order_id');
-
-        $this->app->rider_order_delivery_lib->delivery_complete($order_id);
-
-        redirect('/rider_order_delivery.php');
+        redirect('/rider_history_delivery.php');
     }
 }

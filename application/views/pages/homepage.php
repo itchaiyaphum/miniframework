@@ -67,6 +67,22 @@
         ?>
 
         <?php
+        // if user type = rider
+        if ($this->profile_lib->get_user_type() == 'rider') {
+            ?>
+        <div class="row text-center p-4">
+            <div class="col border p-4 ">
+                <a href="/rider_order_delivery.php" class="btn btn-lg">รายการอาหารที่รอจัดส่ง</a>
+            </div>
+            <div class="col border p-4">
+                <a href="/rider_history_delivery.php" class="btn btn-lg">ประวัติการส่งอาหาร</a>
+            </div>
+        </div>
+        <?php
+        }
+        ?>
+
+        <?php
         // if user type = admin
         if ($this->profile_lib->get_user_type() == 'admin') {
             ?>

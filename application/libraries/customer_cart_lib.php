@@ -84,6 +84,7 @@ class Customer_cart_lib extends Library
         $data = [
             'customer_id' => $profile_id,
             'restaurant_id' => $restaurant_id,
+            'rider_id' => 0,
             'total_price' => $total_summary_price,
             'status' => 0,
             'review_status' => 0,

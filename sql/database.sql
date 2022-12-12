@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 12, 2022 at 02:33 AM
+-- Generation Time: Dec 12, 2022 at 03:20 AM
 -- Server version: 5.6.38
 -- PHP Version: 7.2.1
 
@@ -91,6 +91,7 @@ CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL DEFAULT '0',
   `restaurant_id` int(11) NOT NULL DEFAULT '0',
+  `rider_id` int(11) NOT NULL DEFAULT '0',
   `total_price` double NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -102,11 +103,11 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `customer_id`, `restaurant_id`, `total_price`, `created_at`, `updated_at`, `status`, `review_status`) VALUES
-(5, 4, 2, 90, '2022-12-12 00:59:36', '2022-12-12 00:59:36', 1, 0),
-(6, 4, 2, 900, '2022-12-12 01:48:07', '2022-12-12 01:48:07', 2, 0),
-(7, 4, 2, 600, '2022-12-12 01:48:28', '2022-12-12 09:28:05', 3, 1),
-(8, 4, 2, 270, '2022-12-12 09:31:49', '2022-12-12 09:31:49', 0, 0);
+INSERT INTO `orders` (`id`, `customer_id`, `restaurant_id`, `rider_id`, `total_price`, `created_at`, `updated_at`, `status`, `review_status`) VALUES
+(5, 4, 2, 0, 90, '2022-12-12 00:59:36', '2022-12-12 00:59:36', 1, 0),
+(6, 4, 2, 3, 900, '2022-12-12 01:48:07', '2022-12-12 10:18:17', 3, 1),
+(7, 4, 2, 3, 600, '2022-12-12 01:48:28', '2022-12-12 09:28:05', 3, 1),
+(8, 4, 2, 0, 270, '2022-12-12 09:31:49', '2022-12-12 09:31:49', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -197,7 +198,8 @@ CREATE TABLE `reviews` (
 INSERT INTO `reviews` (`id`, `order_id`, `user_id`, `restaurant_id`, `detail`, `created_at`, `updated_at`) VALUES
 (1, 1, 4, 2, 'สมคำลำรือกับร้านจริงๆครับ', '2022-12-11 00:00:00', '0000-00-00 00:00:00'),
 (2, 2, 4, 2, 'อร่อยที่สุดเลย', '2022-12-07 00:00:00', '0000-00-00 00:00:00'),
-(5, 7, 4, 7, 'อร่อยมากครับ', '2022-12-12 09:28:05', '2022-12-12 09:28:05');
+(5, 7, 4, 7, 'อร่อยมากครับ', '2022-12-12 09:28:05', '2022-12-12 09:28:05'),
+(6, 6, 4, 6, 'กุ้งสดมากครับ', '2022-12-12 10:18:17', '2022-12-12 10:18:17');
 
 -- --------------------------------------------------------
 
@@ -330,7 +332,7 @@ ALTER TABLE `restaurant_types`
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
